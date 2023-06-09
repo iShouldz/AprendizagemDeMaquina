@@ -32,6 +32,8 @@ matriz2 = np.split(array, 2)
 array = np.array(vetorVirginica)
 matriz3 = np.split(array, 2)
 
+print(matriz)
+
 #Separando conjunto de treino e teste de cada classe
 arrayTreinamentoSetosa = matriz[0]
 arrayTestesSetosa = matriz[1]
@@ -39,7 +41,7 @@ arrayTreinamentoVersicolor = matriz2[0]
 arrayTestesVersicolor = matriz2[1]
 arrayTreinamentoVirginica = matriz3[0]
 arrayTestesVirginica = matriz3[1]
-
+print(arrayTreinamentoSetosa)
 #Concatenando os conjuntos de treino e teste
 arrayTreinamento = np.concatenate((arrayTreinamentoSetosa, arrayTreinamentoVersicolor))
 arrayTreinamento = np.concatenate((arrayTreinamento, arrayTreinamentoVirginica))
@@ -60,7 +62,7 @@ arrayTreinamento = arrayTreinamento.astype('float64')
 
 #Realizando classificação para 1-NN
 classificadores = classificadores.ravel()
-neigh = KNeighborsClassifier()
+neigh = KNeighborsClassifier(n_neighbors=1)
 neigh.fit(arrayTreinamento, classificadores)
 resultado = neigh.predict(arrayTeste)
 
@@ -72,5 +74,6 @@ for i in range(len(resultado)):
         print(acertosClassificadores[i])
         print("^ em: " + str(i))
         print(resultado[i])
-
-print("Taxa de acerto: " + str(contador) + "/75")
+        print("========================")
+print(neigh.score(arrayTeste, acertosClassificadores))
+print("Taxa de acerto: " + str(contador) + "/75, " + str((contador/75) * 100) + "%")

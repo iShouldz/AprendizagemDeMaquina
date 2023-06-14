@@ -66,6 +66,7 @@ neigh = KNeighborsClassifier(n_neighbors=1)
 neigh.fit(arrayTreinamento, classificadores)
 resultado = neigh.predict(arrayTeste)
 
+
 #Realizando verificação de acertos e em caso de erro, exibir o indice e a disparidade encontrada
 for i in range(len(resultado)):
     if(acertosClassificadores[i] == resultado[i]):

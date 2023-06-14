@@ -12,7 +12,7 @@ vetorUS = []
 linguas = open("accent-mfcc-data-1.csv", "r")
 arquivo = linguas.read()
 leitura = arquivo.split("\n")
-#del leitura[0]
+del leitura[0]
 
 for x in leitura:
     arquivoSplit = x.split(",")
@@ -73,13 +73,44 @@ classificadores = classificadores.ravel()
 neigh = KNeighborsClassifier(n_neighbors=7, weights='distance', metric='euclidean')
 neigh.fit(arrayTreinamento, classificadores)
 resultado = neigh.predict(arrayTeste)
-print(len(resultado))
-print(len(acertoClassificadores))
-print(len(arrayTreinamento))
-print(len(arrayTeste))
-print(len(classificadores))
-print(neigh.score(arrayTeste, acertoClassificadores))
-for i in range(len(resultado)):
+
+print("7-NN Com peso: ")
+neigh = KNeighborsClassifier(n_neighbors=7, weights='distance', metric='euclidean')
+neigh.fit(arrayTreinamento, classificadores)
+resultado = neigh.predict(arrayTeste)
+print(neigh.score(arrayTeste, acertoClassificadores) * 100)
+
+print("7-NN Sem peso: ")
+neigh = KNeighborsClassifier(n_neighbors=7, metric='euclidean')
+neigh.fit(arrayTreinamento, classificadores)
+resultado = neigh.predict(arrayTeste)
+print(neigh.score(arrayTeste, acertoClassificadores) * 100)
+
+print("6-NN Com peso: ")
+neigh = KNeighborsClassifier(n_neighbors=6, weights='distance', metric='euclidean')
+neigh.fit(arrayTreinamento, classificadores)
+resultado = neigh.predict(arrayTeste)
+print(neigh.score(arrayTeste, acertoClassificadores) * 100)
+
+print("6-NN Sem peso: ")
+neigh = KNeighborsClassifier(n_neighbors=6, metric='euclidean')
+neigh.fit(arrayTreinamento, classificadores)
+resultado = neigh.predict(arrayTeste)
+print(neigh.score(arrayTeste, acertoClassificadores) * 100)
+
+print("5-NN Com peso: ")
+neigh = KNeighborsClassifier(n_neighbors=5, weights='distance', metric='euclidean')
+neigh.fit(arrayTreinamento, classificadores)
+resultado = neigh.predict(arrayTeste)
+print(neigh.score(arrayTeste, acertoClassificadores) * 100)
+
+print("5-NN Sem peso: ")
+neigh = KNeighborsClassifier(n_neighbors=5, metric='euclidean')
+neigh.fit(arrayTreinamento, classificadores)
+resultado = neigh.predict(arrayTeste)
+print(neigh.score(arrayTeste, acertoClassificadores) * 100)
+
+'''for i in range(len(resultado)):
     if(acertoClassificadores[i] == resultado[i]):
         contador += 1
     else:
@@ -89,3 +120,4 @@ for i in range(len(resultado)):
         print("========================")
 
 print("Taxa de acerto: " + str(neigh.score(arrayTeste, acertoClassificadores) * 100) + "%")
+'''

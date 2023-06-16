@@ -5,11 +5,7 @@ teste e o restante como conjunto de treinamento. Atenção: construa também a i
 da distância euclidiana.
 '''
 
-import numpy as np
 import auxiliar, baseDeDados
-from sklearn.datasets import load_iris
-from sklearn.model_selection import train_test_split
-
 
 x_treino = baseDeDados.baseIris_Treinamento()
 y_treino = baseDeDados.baseIris_Classificadores_Treinamento()

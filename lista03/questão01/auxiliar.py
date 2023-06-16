@@ -8,7 +8,6 @@ def distanciaEuclidiana(xi, xj):
     for i in range(len(xi)):
         soma += math.pow(xi[i - 1] - xj[i - 1], 2)
     return math.sqrt(soma).__round__(2)
-#pegar aquele video do professor e copiar implementação msm
 
 
 '''

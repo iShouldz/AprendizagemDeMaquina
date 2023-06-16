@@ -72,7 +72,6 @@ def verificarAcerto(arrayClassificadoByKNN, arrayClassificadoTeste):
     for i in range(len(arrayClassificadoByKNN)):
         if arrayClassificadoByKNN[i] == arrayClassificadoTeste[i]:
             contador += 1
-    print(contador)
     return contador / len(arrayClassificadoByKNN) * 100
 
 '''

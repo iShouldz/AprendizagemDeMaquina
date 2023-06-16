@@ -54,6 +54,24 @@ classificadores = np.delete(copia, [0, 1, 2, 3], 1)
 arrayTreinamento = np.delete(arrayTreinamento, [4], 1)
 arrayTreinamento = arrayTreinamento.astype('float64')
 
+def baseIris_Treinamento():
+    return arrayTreinamento
+
+def baseIris_Classificadores_Treinamento():
+    return classificadores
+
+def baseIris_Teste():
+    return arrayTeste
+
+def baseIris_Classificadores_Teste():
+    return acertosClassificadores
+
+
+def verificarAcerto(arrayClassificadoByKNN, arrayClassificadoTeste):
+    contador = 0
+    for i in range(len(arrayClassificadoByKNN)):
+        if (arrayClassificadoByKNN[i] == arrayClassificadoTeste[i]):
+            contador += 1
 
 
 print("x_treinamento: ")

@@ -70,10 +70,12 @@ def baseIris_Classificadores_Teste():
 def verificarAcerto(arrayClassificadoByKNN, arrayClassificadoTeste):
     contador = 0
     for i in range(len(arrayClassificadoByKNN)):
-        if (arrayClassificadoByKNN[i] == arrayClassificadoTeste[i]):
+        if arrayClassificadoByKNN[i] == arrayClassificadoTeste[i]:
             contador += 1
+    print(contador)
+    return contador / len(arrayClassificadoByKNN) * 100
 
-
+'''
 print("x_treinamento: ")
 print(arrayTreinamento)
 
@@ -84,4 +86,4 @@ print("x_teste")
 print(arrayTeste)
 
 print("TesteClass")
-print(acertosClassificadores)
+print(acertosClassificadores)'''

@@ -132,5 +132,25 @@ def verificarPresenca(arrayDistancias):
 
     print(vetorfinal)
 
+def verificarPresencaPeso(arrayDistancias, classes):
+    vetor = []
+    vetor2 = []
+    vetorfinal = []
+    for i in range(len(arrayDistancias)):
+        vetor2.append(vetor)
+        for j in range(len(arrayDistancias[0])):
+           vetor.append(arrayDistancias[i][j][0])
+        vetor = []
+    #len(vetor2) ==> o valor de k
+    print("Vetor 2")
+    print(vetor2)
+
+    for l in range(len(vetor2)):
+        moda = statistics.mode(vetor2[l])
+        vetorfinal.append(moda)
+
+    print(vetorfinal)
+
+
 
 

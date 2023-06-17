@@ -5,7 +5,7 @@ teste e o restante como conjunto de treinamento. Atenção: construa também a i
 da distância euclidiana.
 '''
 
-import auxiliar, baseDeDados
+import auxiliar, baseDeDados, teste
 
 x_treino = baseDeDados.baseIris_Treinamento()
 y_treino = baseDeDados.baseIris_Classificadores_Treinamento()
@@ -26,7 +26,8 @@ print("Taxa de Acerto: " + str(baseDeDados.verificarAcerto(resultado, y_teste)._
 
 
 
-'''print("##########################################################")
+'''
+print("##########################################################")
 print(x_treino)
 print("==================")
 print(y_treino)
@@ -37,14 +38,22 @@ print(y_teste)
 
 print("==================")
 print("==================")
-'''
+
 print("Para distancia euclidiana em 1-NN da base iris:")
 print("Taxa de Acerto: " + str(baseDeDados.verificarAcerto(resultado, y_teste).__round__(2)) + "%")
+'''
 
-"""
-x = [[5.1,3.5,1.4,0.2], [4.7,3.2,1.3,0.2], [5.8,2.7,3.9,1.2], [6.0,2.7,5.1,1.6], [6.3,2.9,5.6,1.8], [6.5,3.0,5.8,2.2]]
+x = [[5.1, 3.5, 1.4, 0.2], [4.7, 3.2, 1.3, 0.2], [5.8, 2.7, 3.9, 1.2],
+     [6.0, 2.7, 5.1, 1.6], [6.3, 2.9, 5.6, 1.8], [6.5, 3.0, 5.8, 2.2]]
 y = ["Iris-setosa", "Iris-setosa", "Iris-versicolor", "Iris-versicolor", "Iris-virginica", "Iris-virginica"]
 
 
-print(auxiliar.vizinhoMaisProximo(x, y, [[5.4,3.0,4.5,1.5],[7.1,3.0,5.9,2.1],[4.9,3.0,1.4,0.2]]))
-"""
+print(auxiliar.vizinhoMaisProximo(x, y, [[5.4, 3.0, 4.5, 1.5], [7.1, 3.0, 5.9, 2.1], [4.9, 3.0, 1.4, 0.2]]))
+print(baseDeDados.verificarAcerto(auxiliar.vizinhoMaisProximo(x, y,
+                                                              [[5.4, 3.0, 4.5, 1.5], [7.1, 3.0, 5.9, 2.1],
+                                                               [4.9, 3.0, 1.4, 0.2]]), ["Iris-versicolor",
+                                                                                        "Iris-virginica",
+                                                                                        "Iris-setosa"]))
+
+#
+print(auxiliar.knn(x, y, [[5.4, 3.0, 4.5, 1.5], [7.1, 3.0, 5.9, 2.1], [4.9, 3.0, 1.4, 0.2]], 4))

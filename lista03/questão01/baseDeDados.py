@@ -66,8 +66,11 @@ for i in range(len(x_teste)):
     novoXTreino.append(np.delete(x_treino[i], [12]))
     novoXTeste.append(np.delete(x_teste[i], [12]))
 
-def removido():
+def removidoTreino():
     return novoXTreino
+
+def removidoTeste():
+    return novoXTeste
 
 def baseIris_Treinamento(i):
     if i == 'i':

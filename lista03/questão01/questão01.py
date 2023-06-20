@@ -38,8 +38,37 @@ print(auxiliar.knn(x, y, [[5.4, 3.0, 4.5, 1.5], [7.1, 3.0, 5.9, 2.1], [4.9, 3.0,
 
 
 
+semColuna = baseDeDados.removido()
+
+resultado = auxiliar.knn(x_treino, y_treino, x_teste, 3)
+print("Taxa de acerto para 3-NN - SEM PESO: ", baseDeDados.verificarAcerto(resultado, y_teste))
+resultado = auxiliar.knn(semColuna, y_treino, x_teste, 3)
+print("Taxa de acerto para 3-NN - SEM PESO: (SEM A ULTIMA COLUNA)", baseDeDados.verificarAcerto(resultado, y_teste))
+
+resultado = auxiliar.knn(x_treino, y_treino, x_teste, 4)
+print("Taxa de acerto para 4-NN - SEM PESO: ", baseDeDados.verificarAcerto(resultado, y_teste))
+resultado = auxiliar.knn(semColuna, y_treino, x_teste, 4)
+print("Taxa de acerto para 4-NN - SEM PESO: (SEM A ULTIMA COLUNA)", baseDeDados.verificarAcerto(resultado, y_teste))
+
+resultado = auxiliar.knn(x_treino, y_treino, x_teste, 5)
+print("Taxa de acerto para 5-NN - SEM PESO: ", baseDeDados.verificarAcerto(resultado, y_teste))
+resultado = auxiliar.knn(semColuna, y_treino, x_teste, 5)
+print("Taxa de acerto para 5-NN - SEM PESO: (SEM A ULTIMA COLUNA)", baseDeDados.verificarAcerto(resultado, y_teste))
+
+resultado = auxiliar.knn(x_treino, y_treino, x_teste, 6)
+print("Taxa de acerto para 6-NN - SEM PESO: ", baseDeDados.verificarAcerto(resultado, y_teste))
+resultado = auxiliar.knn(semColuna, y_treino, x_teste, 6)
+print("Taxa de acerto para 6-NN - SEM PESO: (SEM A ULTIMA COLUNA)", baseDeDados.verificarAcerto(resultado, y_teste))
+
 resultado = auxiliar.knn(x_treino, y_treino, x_teste, 7)
 print("Taxa de acerto para 7-NN - SEM PESO: ", baseDeDados.verificarAcerto(resultado, y_teste))
+resultado = auxiliar.knn(semColuna, y_treino, x_teste, 7)
+print("Taxa de acerto para 7-NN - SEM PESO: (SEM A ULTIMA COLUNA)", baseDeDados.verificarAcerto(resultado, y_teste))
+
+resultado = auxiliar.knn(x_treino, y_treino, x_teste, 8)
+print("Taxa de acerto para 8-NN - SEM PESO: ", baseDeDados.verificarAcerto(resultado, y_teste))
+resultado = auxiliar.knn(semColuna, y_treino, x_teste, 8)
+print("Taxa de acerto para 8-NN - SEM PESO: (SEM A ULTIMA COLUNA)", baseDeDados.verificarAcerto(resultado, y_teste))
 
 
 

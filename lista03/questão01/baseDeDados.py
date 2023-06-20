@@ -4,12 +4,14 @@ from sklearn.model_selection import train_test_split
 
 
 contador = 0
+novoXTreino = []
+novoXTeste = []
 vetorSetosa = []
 leitura = []
 teste = []
 vetorVersicolor = []
 vetorVirginica = []
-x, y = load_iris(return_X_y=True)
+x, y = load_wine(return_X_y=True)
 x_treino, x_teste, y_treino, y_teste = train_test_split(x, y, test_size=0.5)
 
 #Base de dados
@@ -58,6 +60,17 @@ copia = arrayTreinamento
 classificadores = np.delete(copia, [0, 1, 2, 3], 1)
 arrayTreinamento = np.delete(arrayTreinamento, [4], 1)
 arrayTreinamento = arrayTreinamento.astype('float64')
+
+for i in range(len(x_teste)):
+    novoXTreino.append(np.delete(x_treino[i], [12]))
+    novoXTeste.append(np.delete(x_teste[i], [12]))
+
+def removido():
+    return novoXTreino
+
+
+
+
 
 def baseIris_Treinamento():
     #return arrayTreinamento

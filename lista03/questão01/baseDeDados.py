@@ -1,4 +1,7 @@
 import numpy as np
+from sklearn.datasets import load_wine, load_iris
+from sklearn.model_selection import train_test_split
+
 
 contador = 0
 vetorSetosa = []
@@ -6,6 +9,8 @@ leitura = []
 teste = []
 vetorVersicolor = []
 vetorVirginica = []
+x, y = load_iris(return_X_y=True)
+x_treino, x_teste, y_treino, y_teste = train_test_split(x, y, test_size=0.5)
 
 #Base de dados
 iris = open("iris.txt", "r")
@@ -55,24 +60,31 @@ arrayTreinamento = np.delete(arrayTreinamento, [4], 1)
 arrayTreinamento = arrayTreinamento.astype('float64')
 
 def baseIris_Treinamento():
-    return arrayTreinamento
+    #return arrayTreinamento
+    return x_treino
 
 def baseIris_Classificadores_Treinamento():
-    return classificadores
+    #return classificadores
+    return y_treino
 
 def baseIris_Teste():
-    return arrayTeste
+    #return arrayTeste
+    return x_teste
 
 def baseIris_Classificadores_Teste():
-    return acertosClassificadores
-
+    #return acertosClassificadores
+    return y_teste
 
 def verificarAcerto(arrayClassificadoByKNN, arrayClassificadoTeste):
     contador = 0
     for i in range(len(arrayClassificadoByKNN)):
         if arrayClassificadoByKNN[i] == arrayClassificadoTeste[i]:
             contador += 1
-    return contador / len(arrayClassificadoByKNN) * 100
+    return (contador / len(arrayClassificadoByKNN) * 100).__round__(2)
+
+
+
+
 
 '''
 print("x_treinamento: ")

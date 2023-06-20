@@ -66,33 +66,38 @@ def vizinhoMaisProximoMinkowski(x_treino, y_treino, x_teste, p):
 
 
 def knn(x_treino, y_treino, x_teste, k):
-    dmin = 99999999999
-    imin = 0
-    classification = []
-    classificationdata = []
-    classData = []
-    for j in range(len(x_teste)):
-        #classdata possui todas as distancias
-        classData.append(classificationdata)
-        # print("\n")
-        for i in range(len(x_treino)):
-            # print("DISTANCIA: " + str(distanciaEuclidiana(x_treino[i], x_teste[j])))
-            data = [distanciaEuclidiana(x_treino[i], x_teste[j]), y_treino[i]]
-            classificationdata.append(data)
-            if distanciaEuclidiana(x_treino[i], x_teste[j]) < dmin:
-                dmin = distanciaEuclidiana(x_treino[i], x_teste[j])
-                imin = i
-                # print("MATCH! " + str(y_treino[imin]) + "EM: " + str(imin))
+    #Se k == 1, então temos vizinho mais proximo
+    if(k == 1):
+        return vizinhoMaisProximo(x_treino, y_treino, x_teste)
+    else:
         dmin = 99999999999
+        imin = 0
+        classification = []
         classificationdata = []
-        classification.append(y_treino[imin])
-    '''print(classData[0])
-    print(classData[1])
-    print(classData[2])'''
-    knn = ordenarVetor(classData, k)
-    verificarPresenca(knn)
+        classData = []
+        for j in range(len(x_teste)):
+            # classdata possui todas as distancias
+            classData.append(classificationdata)
+            # print("\n")
+            for i in range(len(x_treino)):
+                # print("DISTANCIA: " + str(distanciaEuclidiana(x_treino[i], x_teste[j])))
+                #print(x_treino[i])
+                #print(x_teste[j])
+                data = [distanciaEuclidiana(x_treino[i], x_teste[j]), y_treino[i]]
+                classificationdata.append(data)
+                if distanciaEuclidiana(x_treino[i], x_teste[j]) < dmin:
+                    dmin = distanciaEuclidiana(x_treino[i], x_teste[j])
+                    imin = i
+                    # print("MATCH! " + str(y_treino[imin]) + "EM: " + str(imin))
+            dmin = 99999999999
+            classificationdata = []
+            classification.append(y_treino[imin])
+        #print("classdata: ", classData)
+        knn = ordenarVetor(classData, k)
+        return verificarPresenca(knn)
 
-    return classification
+        #return classification
+
 
 
 def ordenarVetor(arrayDistancias, k):
@@ -107,12 +112,11 @@ def ordenarVetor(arrayDistancias, k):
         novoArray = []
     for j in range(len(novoArray2)):
         novoArray2[j].sort()
-
+    #print("Sem remoção: ", arrayDistancias)
     for p in range(len(arrayDistancias)):
         arrayDistancias[p].sort()
-        del arrayDistancias[p][-k:]
-
-    print(arrayDistancias)
+        del arrayDistancias[p][k:]
+    #print("arraydistancia: ", arrayDistancias)
     return arrayDistancias
 
 #Retorna a moda dos elementos
@@ -125,12 +129,16 @@ def verificarPresenca(arrayDistancias):
         for j in range(len(arrayDistancias[0])):
            vetor.append(arrayDistancias[i][j][1])
         vetor = []
+
+    #print(len(vetor2))
+    #print("vetor final: ",vetor2)
     #len(vetor2) ==> o valor de k
     for l in range(len(vetor2)):
         moda = statistics.mode(vetor2[l])
         vetorfinal.append(moda)
-
-    print(vetorfinal)
+    #print("vetor modal: ", vetorfinal)
+    #Retorna a classificação de acordo com a moda
+    return vetorfinal
 
 def verificarPresencaPeso(arrayDistancias, classes):
     vetor = []

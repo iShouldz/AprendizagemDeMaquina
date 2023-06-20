@@ -61,6 +61,7 @@ classificadores = np.delete(copia, [0, 1, 2, 3], 1)
 arrayTreinamento = np.delete(arrayTreinamento, [4], 1)
 arrayTreinamento = arrayTreinamento.astype('float64')
 
+
 for i in range(len(x_teste)):
     novoXTreino.append(np.delete(x_treino[i], [12]))
     novoXTeste.append(np.delete(x_teste[i], [12]))
@@ -68,25 +69,29 @@ for i in range(len(x_teste)):
 def removido():
     return novoXTreino
 
+def baseIris_Treinamento(i):
+    if i == 'i':
+        return arrayTreinamento
+    else:
+        return x_treino
 
+def baseIris_Classificadores_Treinamento(i):
+    if i == 'i':
+        return classificadores
+    else:
+        return y_treino
 
+def baseIris_Teste(i):
+    if i == 'i':
+        return arrayTeste
+    else:
+        return x_teste
 
-
-def baseIris_Treinamento():
-    #return arrayTreinamento
-    return x_treino
-
-def baseIris_Classificadores_Treinamento():
-    #return classificadores
-    return y_treino
-
-def baseIris_Teste():
-    #return arrayTeste
-    return x_teste
-
-def baseIris_Classificadores_Teste():
-    #return acertosClassificadores
-    return y_teste
+def baseIris_Classificadores_Teste(i):
+    if i == 'i':
+        return acertosClassificadores
+    else:
+        return y_teste
 
 def verificarAcerto(arrayClassificadoByKNN, arrayClassificadoTeste):
     contador = 0
@@ -94,20 +99,3 @@ def verificarAcerto(arrayClassificadoByKNN, arrayClassificadoTeste):
         if arrayClassificadoByKNN[i] == arrayClassificadoTeste[i]:
             contador += 1
     return (contador / len(arrayClassificadoByKNN) * 100).__round__(2)
-
-
-
-
-
-'''
-print("x_treinamento: ")
-print(arrayTreinamento)
-
-print("TreinoClass")
-print(classificadores)
-
-print("x_teste")
-print(arrayTeste)
-
-print("TesteClass")
-print(acertosClassificadores)'''

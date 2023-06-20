@@ -7,10 +7,10 @@ da distância euclidiana.
 
 import auxiliar, baseDeDados
 
-x_treino = baseDeDados.baseIris_Treinamento().tolist()
-y_treino = baseDeDados.baseIris_Classificadores_Treinamento().tolist()
-x_teste = baseDeDados.baseIris_Teste().tolist()
-y_teste = baseDeDados.baseIris_Classificadores_Teste().tolist()
+x_treino = baseDeDados.baseIris_Treinamento("w").tolist()
+y_treino = baseDeDados.baseIris_Classificadores_Treinamento("w").tolist()
+x_teste = baseDeDados.baseIris_Teste("w").tolist()
+y_teste = baseDeDados.baseIris_Classificadores_Teste("w").tolist()
 
 print("Taxa de acerto, para Minkowski p = 1")
 resultado = auxiliar.vizinhoMaisProximoMinkowski(x_treino, y_treino, x_teste, 1)
@@ -24,19 +24,79 @@ print("Taxa de acerto, para Minkowski p = 4")
 resultado = auxiliar.vizinhoMaisProximoMinkowski(x_treino, y_treino, x_teste, 4)
 print("Taxa de Acerto: " + str(baseDeDados.verificarAcerto(resultado, y_teste).__round__(2)) + "%")
 
+semColuna = baseDeDados.removido()
 
+resultado = auxiliar.knn(x_treino, y_treino, x_teste, 3, False)
+print("Taxa de acerto para 3-NN - SEM PESO: ", baseDeDados.verificarAcerto(resultado, y_teste))
+resultado = auxiliar.knn(x_treino, y_treino, x_teste, 3, True)
+print("Taxa de acerto para 3-NN - COM PESO: ", baseDeDados.verificarAcerto(resultado, y_teste))
+resultado = auxiliar.knn(semColuna, y_treino, x_teste, 3, False)
+print("Taxa de acerto para 3-NN - SEM PESO: (SEM A ULTIMA COLUNA)", baseDeDados.verificarAcerto(resultado, y_teste))
+resultado = auxiliar.knn(semColuna, y_treino, x_teste, 3, True)
+print("Taxa de acerto para 3-NN - COM PESO: (SEM A ULTIMA COLUNA)", baseDeDados.verificarAcerto(resultado, y_teste))
+
+
+resultado = auxiliar.knn(x_treino, y_treino, x_teste, 4, False)
+print("Taxa de acerto para 4-NN - SEM PESO: ", baseDeDados.verificarAcerto(resultado, y_teste))
+resultado = auxiliar.knn(x_treino, y_treino, x_teste, 4, True)
+print("Taxa de acerto para 4-NN - COM PESO: ", baseDeDados.verificarAcerto(resultado, y_teste))
+resultado = auxiliar.knn(semColuna, y_treino, x_teste, 4, False)
+print("Taxa de acerto para 4-NN - SEM PESO: (SEM A ULTIMA COLUNA)", baseDeDados.verificarAcerto(resultado, y_teste))
+resultado = auxiliar.knn(semColuna, y_treino, x_teste, 4, True)
+print("Taxa de acerto para 4-NN - COM PESO: (SEM A ULTIMA COLUNA)", baseDeDados.verificarAcerto(resultado, y_teste))
+
+
+resultado = auxiliar.knn(x_treino, y_treino, x_teste, 5, False)
+print("Taxa de acerto para 5-NN - SEM PESO: ", baseDeDados.verificarAcerto(resultado, y_teste))
+resultado = auxiliar.knn(x_treino, y_treino, x_teste, 5, True)
+print("Taxa de acerto para 5-NN - COM PESO: ", baseDeDados.verificarAcerto(resultado, y_teste))
+resultado = auxiliar.knn(semColuna, y_treino, x_teste, 5, False)
+print("Taxa de acerto para 5-NN - SEM PESO: (SEM A ULTIMA COLUNA)", baseDeDados.verificarAcerto(resultado, y_teste))
+resultado = auxiliar.knn(semColuna, y_treino, x_teste, 5, True)
+print("Taxa de acerto para 5-NN - COM PESO: (SEM A ULTIMA COLUNA)", baseDeDados.verificarAcerto(resultado, y_teste))
+
+
+resultado = auxiliar.knn(x_treino, y_treino, x_teste, 6, False)
+print("Taxa de acerto para 6-NN - SEM PESO: ", baseDeDados.verificarAcerto(resultado, y_teste))
+resultado = auxiliar.knn(x_treino, y_treino, x_teste, 6, True)
+print("Taxa de acerto para 6-NN - COM PESO: ", baseDeDados.verificarAcerto(resultado, y_teste))
+resultado = auxiliar.knn(semColuna, y_treino, x_teste, 6, False)
+print("Taxa de acerto para 6-NN - SEM PESO: (SEM A ULTIMA COLUNA)", baseDeDados.verificarAcerto(resultado, y_teste))
+resultado = auxiliar.knn(semColuna, y_treino, x_teste, 6, True)
+print("Taxa de acerto para 6-NN - COM PESO: (SEM A ULTIMA COLUNA)", baseDeDados.verificarAcerto(resultado, y_teste))
+
+
+resultado = auxiliar.knn(x_treino, y_treino, x_teste, 7, False)
+print("Taxa de acerto para 7-NN - SEM PESO: ", baseDeDados.verificarAcerto(resultado, y_teste))
+resultado = auxiliar.knn(x_treino, y_treino, x_teste, 7, True)
+print("Taxa de acerto para 7-NN - COM PESO: ", baseDeDados.verificarAcerto(resultado, y_teste))
+resultado = auxiliar.knn(semColuna, y_treino, x_teste, 7, False)
+print("Taxa de acerto para 7-NN - SEM PESO: (SEM A ULTIMA COLUNA)", baseDeDados.verificarAcerto(resultado, y_teste))
+resultado = auxiliar.knn(semColuna, y_treino, x_teste, 7, True)
+print("Taxa de acerto para 7-NN - COM PESO: (SEM A ULTIMA COLUNA)", baseDeDados.verificarAcerto(resultado, y_teste))
+
+
+resultado = auxiliar.knn(x_treino, y_treino, x_teste, 8, False)
+print("Taxa de acerto para 8-NN - SEM PESO: ", baseDeDados.verificarAcerto(resultado, y_teste))
+resultado = auxiliar.knn(x_treino, y_treino, x_teste, 8, True)
+print("Taxa de acerto para 8-NN - COM PESO: ", baseDeDados.verificarAcerto(resultado, y_teste))
+resultado = auxiliar.knn(semColuna, y_treino, x_teste, 8, False)
+print("Taxa de acerto para 8-NN - SEM PESO: (SEM A ULTIMA COLUNA)", baseDeDados.verificarAcerto(resultado, y_teste))
+resultado = auxiliar.knn(semColuna, y_treino, x_teste, 8, True)
+print("Taxa de acerto para 8-NN - COM PESO: (SEM A ULTIMA COLUNA)", baseDeDados.verificarAcerto(resultado, y_teste))
+
+
+
+
+
+
+'''
 x = [[5.1, 3.5, 1.4, 0.2], [4.7, 3.2, 1.3, 0.2], [5.8, 2.7, 3.9, 1.2],
      [6.0, 2.7, 5.1, 1.6], [6.3, 2.9, 5.6, 1.8], [6.5, 3.0, 5.8, 2.2]]
 y = ["Iris-setosa", "Iris-setosa", "Iris-versicolor",
      "Iris-versicolor", "Iris-virginica", "Iris-virginica"]
-'''
-print(auxiliar.knn(x, y, [[5.4, 3.0, 4.5, 1.5], [7.1, 3.0, 5.9, 2.1], [4.9, 3.0, 1.4, 0.2]], 2))
+
 print(auxiliar.knn(x, y, [[5.4, 3.0, 4.5, 1.5], [7.1, 3.0, 5.9, 2.1], [4.9, 3.0, 1.4, 0.2]], 3))
-print(auxiliar.knn(x, y, [[5.4, 3.0, 4.5, 1.5], [7.1, 3.0, 5.9, 2.1], [4.9, 3.0, 1.4, 0.2]], 4))
-print(auxiliar.knn(x, y, [[5.4, 3.0, 4.5, 1.5], [7.1, 3.0, 5.9, 2.1], [4.9, 3.0, 1.4, 0.2]], 5))
-'''
-
-
 
 semColuna = baseDeDados.removido()
 
@@ -70,9 +130,6 @@ print("Taxa de acerto para 8-NN - SEM PESO: ", baseDeDados.verificarAcerto(resul
 resultado = auxiliar.knn(semColuna, y_treino, x_teste, 8)
 print("Taxa de acerto para 8-NN - SEM PESO: (SEM A ULTIMA COLUNA)", baseDeDados.verificarAcerto(resultado, y_teste))
 
-
-
-'''
 print("##########################################################")
 print(x_treino)
 print("==================")

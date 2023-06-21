@@ -8,6 +8,7 @@ dividir os dados entre treino e teste.
 
 import lista04auxiliar
 from sklearn.neighbors import KNeighborsClassifier
+classes = [0, 1, 2]
 
 holdoutXTreino, holdoutYTreino, holdoutXTeste, holdoutYTeste = lista04auxiliar.holdout()
 
@@ -15,3 +16,6 @@ resultado = KNeighborsClassifier(n_neighbors=1)
 resultado.fit(holdoutXTreino, holdoutYTreino)
 resultado.predict(holdoutXTeste)
 print((resultado.score(holdoutXTeste, holdoutYTeste) * 100).__round__(2))
+
+# Calcula a matriz de confusão
+lista04auxiliar.exibirMatrizConfusao(holdoutYTeste, resultado.predict(holdoutXTeste), classes)

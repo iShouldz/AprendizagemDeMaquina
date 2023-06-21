@@ -31,3 +31,17 @@ def recallByclass(matriz, classe):
         soma += matriz[classe][i]
     return (numerador/soma * 100).__round__(2)
 
+def precisaByclass(matriz, classe):
+    soma = 0
+    numerador = matriz[classe][classe]
+    for i in range(len(matriz[classe])):
+        soma += matriz[i][classe]
+    return (numerador / soma * 100).__round__(2)
+
+def taxaDeAcerto(matriz, x_teste):
+    soma = 0
+    print(len(matriz))
+    for i in range(len(matriz)):
+        soma += matriz[i][i]
+    return (soma/len(x_teste)*100).__round__(2)
+

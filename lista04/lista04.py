@@ -17,5 +17,5 @@ resultado.fit(holdoutXTreino, holdoutYTreino)
 resultado.predict(holdoutXTeste)
 print((resultado.score(holdoutXTeste, holdoutYTeste) * 100).__round__(2))
 
-# Calcula a matriz de confusão
 lista04auxiliar.exibirMatrizConfusao(holdoutYTeste, resultado.predict(holdoutXTeste), classes)
+print(lista04auxiliar.recallByclass(lista04auxiliar.matrizConfusao(holdoutYTeste, resultado.predict(holdoutXTeste)), 1))

@@ -23,3 +23,11 @@ def exibirMatrizConfusao(y_teste, y_knn, classes):
     print(classes)
     for row in cm:
         print(row)
+
+def recallByclass(matriz, classe):
+    soma = 0
+    numerador = matriz[classe][classe]
+    for i in range(len(matriz[classe])):
+        soma += matriz[classe][i]
+    return (numerador/soma * 100).__round__(2)
+

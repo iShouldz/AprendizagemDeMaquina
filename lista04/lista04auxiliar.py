@@ -40,7 +40,6 @@ def precisaByclass(matriz, classe):
 
 def taxaDeAcerto(matriz, x_teste):
     soma = 0
-    print(len(matriz))
     for i in range(len(matriz)):
         soma += matriz[i][i]
     return (soma/len(x_teste)*100).__round__(2)
@@ -48,5 +47,22 @@ def taxaDeAcerto(matriz, x_teste):
 def medidaFbyClass(precisao, recall):
     return ((2 * precisao * recall) / (precisao + recall)).__round__(2)
 
-
-
+def taxaFP(matriz, classe):
+    vn = 0
+    if classe == 0:
+        fp = matriz[1][0] + matriz[2][0]
+        for i in range(1, 2):
+            for j in range(1, 2):
+                vn += matriz[i][j]
+    elif classe == 1:
+        fp = matriz[0][1] + matriz[2][1]
+        vn = matriz[0][0] + matriz[0][2] + matriz[2][0] + matriz[2][2]
+        print(fp)
+        print(vn)
+    else:
+        fp = matriz[0][2] + matriz[1][2]
+        for i in range(0, 1):
+            for j in range(0, 1):
+                vn += matriz[i][j]
+    print((fp/(fp + vn)) * 100)
+    return ((fp/(fp + vn)) * 100).__round__(2)

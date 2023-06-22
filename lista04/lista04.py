@@ -15,13 +15,14 @@ holdoutXTreino, holdoutYTreino, holdoutXTeste, holdoutYTeste = lista04auxiliar.h
 resultado = KNeighborsClassifier(n_neighbors=1)
 resultado.fit(holdoutXTreino, holdoutYTreino)
 resultado.predict(holdoutXTeste)
-print((resultado.score(holdoutXTeste, holdoutYTeste) * 100).__round__(2))
+#print((resultado.score(holdoutXTeste, holdoutYTeste) * 100).__round__(2))
 
 matriz = lista04auxiliar.matrizConfusao(holdoutYTeste, resultado.predict(holdoutXTeste))
 acuracia = lista04auxiliar.taxaDeAcerto(matriz, holdoutXTeste)
 recallbyclass = lista04auxiliar.recallByclass(matriz, 1)
 precisaobyclass = lista04auxiliar.precisaByclass(matriz, 1)
 medidaF = lista04auxiliar.medidaFbyClass(precisaobyclass, recallbyclass)
+taxaFP = lista04auxiliar.taxaFP(matriz, 1)
 
 print("Matriz de confusão: ")
 lista04auxiliar.exibirMatrizConfusao(holdoutYTeste, resultado.predict(holdoutXTeste), classes)
@@ -29,3 +30,6 @@ print("Recall por classe(classe 1): ", recallbyclass)
 print("Taxa de acerto: ", acuracia)
 print("Precisão por classe(classe 1): ", precisaobyclass)
 print("Medida F por classe(classe 1): ", medidaF)
+print("Taxa de FP por classe(classe 1): ", taxaFP)
+
+

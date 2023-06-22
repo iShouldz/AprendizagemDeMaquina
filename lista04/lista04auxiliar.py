@@ -29,14 +29,14 @@ def recallByclass(matriz, classe):
     numerador = matriz[classe][classe]
     for i in range(len(matriz[classe])):
         soma += matriz[classe][i]
-    return (numerador/soma * 100).__round__(2)
+    return numerador/soma
 
 def precisaByclass(matriz, classe):
     soma = 0
     numerador = matriz[classe][classe]
     for i in range(len(matriz[classe])):
         soma += matriz[i][classe]
-    return (numerador / soma * 100).__round__(2)
+    return numerador / soma
 
 def taxaDeAcerto(matriz, x_teste):
     soma = 0
@@ -45,24 +45,29 @@ def taxaDeAcerto(matriz, x_teste):
     return (soma/len(x_teste)*100).__round__(2)
 
 def medidaFbyClass(precisao, recall):
-    return ((2 * precisao * recall) / (precisao + recall)).__round__(2)
+    return (2 * precisao * recall) / (precisao + recall)
 
+"""
+SE CLASSE = 0               SE CLASSE = 1               SE CLASSE = 2
+|------||------||------|   |------||------||------|    |------||------||------|
+|  vp  ||  fn  ||  fn  |   |  vn  ||  fp  ||  vn  |    |  vn  ||  vn  ||  fp  | 
+|______||______||______|   |______||______||______|    |______||______||______| 
+|------||------||------|   |------||------||------|    |------||------||------|    
+|  fp  ||  vn  ||  vn  |   |  fn  ||  vp  ||  fn  |    |  vn  ||  vn  ||  fp  |
+|______||______||______|   |______||______||______|    |______||______||______|
+|------||------||------|   |------||------||------|    |------||------||------|
+|  fp  ||  vn  ||  vn  |   |  vn  ||  fp  ||  vn  |    |  fn  ||  fn  ||  vp  |
+|______||______||______|   |______||______||______|    |______||______||______|
+"""
 def taxaFP(matriz, classe):
-    vn = 0
     if classe == 0:
         fp = matriz[1][0] + matriz[2][0]
-        for i in range(1, 2):
-            for j in range(1, 2):
-                vn += matriz[i][j]
+        vn = matriz[1][1] + matriz[1][2] + matriz[2][1] + matriz[2][2]
     elif classe == 1:
         fp = matriz[0][1] + matriz[2][1]
         vn = matriz[0][0] + matriz[0][2] + matriz[2][0] + matriz[2][2]
-        print(fp)
-        print(vn)
     else:
         fp = matriz[0][2] + matriz[1][2]
-        for i in range(0, 1):
-            for j in range(0, 1):
-                vn += matriz[i][j]
-    print((fp/(fp + vn)) * 100)
-    return ((fp/(fp + vn)) * 100).__round__(2)
+        vn = matriz[0][0] + matriz[0][1] + matriz[1][0] + matriz[1][1]
+    return fp/(fp + vn)
+

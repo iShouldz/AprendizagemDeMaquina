@@ -7,29 +7,91 @@ dividir os dados entre treino e teste.
 """
 
 import lista04auxiliar
+import sklearn.metrics as metrics
 from sklearn.neighbors import KNeighborsClassifier
+from sklearn.metrics import multilabel_confusion_matrix
+
 classes = [0, 1, 2]
+
+
+# Exemplo de rótulos reais e previstos
+y_true = [0, 1, 0, 1, 1, 2, 0, 2]
+y_pred = [0, 1, 0, 1, 0, 2, 1, 2]
+
+
 
 holdoutXTreino, holdoutYTreino, holdoutXTeste, holdoutYTeste = lista04auxiliar.holdout()
 
 resultado = KNeighborsClassifier(n_neighbors=1)
 resultado.fit(holdoutXTreino, holdoutYTreino)
 resultado.predict(holdoutXTeste)
-#print((resultado.score(holdoutXTeste, holdoutYTeste) * 100).__round__(2))
 
 matriz = lista04auxiliar.matrizConfusao(holdoutYTeste, resultado.predict(holdoutXTeste))
 acuracia = lista04auxiliar.taxaDeAcerto(matriz, holdoutXTeste)
-recallbyclass = lista04auxiliar.recallByclass(matriz, 1)
-precisaobyclass = lista04auxiliar.precisaByclass(matriz, 1)
-medidaF = lista04auxiliar.medidaFbyClass(precisaobyclass, recallbyclass)
-taxaFP = lista04auxiliar.taxaFP(matriz, 1)
+
+recallbyclass0 = lista04auxiliar.recallByclass(matriz, 0)
+recallbyclass1 = lista04auxiliar.recallByclass(matriz, 1)
+recallbyclass2 = lista04auxiliar.recallByclass(matriz, 2)
+
+precisaobyclass0 = lista04auxiliar.precisaByclass(matriz, 0)
+precisaobyclass1 = lista04auxiliar.precisaByclass(matriz, 1)
+precisaobyclass2 = lista04auxiliar.precisaByclass(matriz, 2)
+
+medidaF0 = lista04auxiliar.medidaFbyClass(precisaobyclass0, recallbyclass0)
+medidaF1 = lista04auxiliar.medidaFbyClass(precisaobyclass1, recallbyclass1)
+medidaF2 = lista04auxiliar.medidaFbyClass(precisaobyclass2, recallbyclass2)
+
+taxaFP0 = lista04auxiliar.taxaFP(matriz, 0)
+taxaFP1 = lista04auxiliar.taxaFP(matriz, 1)
+taxaFP2 = lista04auxiliar.taxaFP(matriz, 2)
 
 print("Matriz de confusão: ")
 lista04auxiliar.exibirMatrizConfusao(holdoutYTeste, resultado.predict(holdoutXTeste), classes)
-print("Recall por classe(classe 1): ", recallbyclass)
-print("Taxa de acerto: ", acuracia)
-print("Precisão por classe(classe 1): ", precisaobyclass)
-print("Medida F por classe(classe 1): ", medidaF)
-print("Taxa de FP por classe(classe 1): ", taxaFP)
 
+"""Uso da biblioteca para comparação"""
+recallReal = metrics.recall_score(holdoutYTeste, resultado.predict(holdoutXTeste), average=None)
+print("RECALL biblioteca: ", recallReal)
+print("==================================")
+precisaoReal = metrics.precision_score(holdoutYTeste, resultado.predict(holdoutXTeste), average=None)
+print("PRECISAO biblioteca: ", precisaoReal)
+print("==================================")
+medidaFReal = metrics.f1_score(holdoutYTeste, resultado.predict(holdoutXTeste), average=None)
+print("MEDIDA F biblioteca: ", medidaFReal)
+print("==================================")
 
+# Exemplo de matriz de confusão 3x3
+cm = matriz
+
+# Calcula a taxa de falsos positivos por classe
+fpr_class_0 = cm[0][1] / (cm[0][1] + cm[0][0] + cm[0][2])  # Classe 0
+fpr_class_1 = cm[1][0] / (cm[1][0] + cm[1][1] + cm[1][2])  # Classe 1
+fpr_class_2 = cm[2][0] / (cm[2][0] + cm[2][1] + cm[2][2])  # Classe 2
+
+# Exibe a taxa de falsos positivos por classe
+print("Taxa de Falsos Positivos - Classe 0:", fpr_class_0)
+print("Taxa de Falsos Positivos - Classe 1:", fpr_class_1)
+print("Taxa de Falsos Positivos - Classe 2:", fpr_class_2)
+
+print("==================================")
+print("Recall por classe(classe 0): ", recallbyclass0)
+print("Recall por classe(classe 1): ", recallbyclass1)
+print("Recall por classe(classe 2): ", recallbyclass2)
+print("==================================")
+
+print("Taxa de acerto do classificador: ", acuracia)
+print("==================================")
+
+print("Precisão por classe(classe 0): ", precisaobyclass0)
+print("Precisão por classe(classe 1): ", precisaobyclass1)
+print("Precisão por classe(classe 2): ", precisaobyclass2)
+print("==================================")
+
+print("Medida F por classe(classe 0): ", medidaF0)
+print("Medida F por classe(classe 1): ", medidaF1)
+print("Medida F por classe(classe 2): ", medidaF2)
+print("==================================")
+
+print("Taxa de FP por classe(classe 0): ", taxaFP0)
+print("Taxa de FP por classe(classe 1): ", taxaFP1)
+print("Taxa de FP por classe(classe 2): ", taxaFP2)
+print("==================================")

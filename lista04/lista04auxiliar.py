@@ -45,3 +45,8 @@ def taxaDeAcerto(matriz, x_teste):
         soma += matriz[i][i]
     return (soma/len(x_teste)*100).__round__(2)
 
+def medidaFbyClass(precisao, recall):
+    return ((2 * precisao * recall) / (precisao + recall)).__round__(2)
+
+
+

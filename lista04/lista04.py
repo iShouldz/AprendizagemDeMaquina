@@ -21,9 +21,11 @@ matriz = lista04auxiliar.matrizConfusao(holdoutYTeste, resultado.predict(holdout
 acuracia = lista04auxiliar.taxaDeAcerto(matriz, holdoutXTeste)
 recallbyclass = lista04auxiliar.recallByclass(matriz, 1)
 precisaobyclass = lista04auxiliar.precisaByclass(matriz, 1)
+medidaF = lista04auxiliar.medidaFbyClass(precisaobyclass, recallbyclass)
 
 print("Matriz de confusão: ")
 lista04auxiliar.exibirMatrizConfusao(holdoutYTeste, resultado.predict(holdoutXTeste), classes)
 print("Recall por classe(classe 1): ", recallbyclass)
 print("Taxa de acerto: ", acuracia)
 print("Precisão por classe(classe 1): ", precisaobyclass)
+print("Medida F por classe(classe 1): ", medidaF)

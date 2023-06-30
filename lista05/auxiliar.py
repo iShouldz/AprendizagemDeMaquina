@@ -1,3 +1,5 @@
+import math
+
 from sklearn.datasets import load_wine
 from sklearn.model_selection import train_test_split
 from sklearn.neighbors import KNeighborsClassifier
@@ -26,14 +28,12 @@ def holdout100():
         holdoutSemColuna.append(verificarAcerto(resultado, y_teste))
     return holdout, holdoutSemColuna
 
-
 def verificarAcerto(arrayClassificadoByKNN, arrayClassificadoTeste):
     contador = 0
     for i in range(len(arrayClassificadoByKNN)):
         if arrayClassificadoByKNN[i] == arrayClassificadoTeste[i]:
             contador += 1
     return (contador / len(arrayClassificadoByKNN) * 100).__round__(2)
-
 
 def removerUltimaColuna(x_treino, x_teste):
     novoXTreino = []
@@ -42,3 +42,38 @@ def removerUltimaColuna(x_treino, x_teste):
         novoXTreino.append(np.delete(x_treino[i], [12]))
         novoXTeste.append(np.delete(x_teste[i], [12]))
     return novoXTreino, novoXTeste
+
+def diferencaTaxaDeAcerto(vetorA, vetorB):
+    vetorDiferenca = []
+    for i in range(len(vetorA)):
+        resultado = vetorA[i] - vetorB[i]
+        vetorDiferenca.append(resultado)
+    return vetorDiferenca
+
+def mediaamostra(vetor):
+    soma = 0
+    for i in range(len(vetor)):
+        soma += vetor[i]
+    return soma/len(vetor)
+
+def calcular_desvio_padrao_amostral(dados):
+    media = mediaamostra(dados)
+    soma_diferencas_quadrado = sum((x - media) ** 2 for x in dados)
+    variancia = soma_diferencas_quadrado / (len(dados) - 1)
+    desvio_padrao = math.sqrt(variancia)
+    return desvio_padrao
+
+def desviopadraoamostral(vetor):
+    soma = 0
+    for i in range(len(vetor)):
+        soma += math.pow(vetor[i] - mediaamostra(vetor), 2)
+    return soma/len(vetor)
+
+def intervaloDeConfianca(vetor):
+    media = mediaamostra(vetor)
+    desvio = calcular_desvio_padrao_amostral(vetor)
+    ladoa = (media - 1.96 * desvio)
+    ladob = (media + 1.96 * desvio)
+
+    return "[" + str(ladoa) + "; " + str(ladob) + "]"
+

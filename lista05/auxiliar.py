@@ -1,6 +1,7 @@
 from sklearn.datasets import load_wine
 from sklearn.model_selection import train_test_split
 from sklearn.neighbors import KNeighborsClassifier
+import numpy as np
 
 x, y = load_wine(return_X_y=True)
 
@@ -21,3 +22,12 @@ def verificarAcerto(arrayClassificadoByKNN, arrayClassificadoTeste):
         if arrayClassificadoByKNN[i] == arrayClassificadoTeste[i]:
             contador += 1
     return (contador / len(arrayClassificadoByKNN) * 100).__round__(2)
+
+
+def removerUltimaColuna(x_treino, x_teste):
+    novoXTreino = []
+    novoXTeste = []
+    for i in range(len(x_teste)):
+        novoXTreino.append(np.delete(x_treino[i], [12]))
+        novoXTeste.append(np.delete(x_teste[i], [12]))
+

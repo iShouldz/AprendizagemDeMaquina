@@ -58,16 +58,10 @@ print("==================================")
 medidaFReal = metrics.f1_score(holdoutYTeste, resultado.predict(holdoutXTeste), average=None)
 print("MEDIDA F biblioteca: ", medidaFReal)
 print("==================================")
-
-# Exemplo de matriz de confusão 3x3
 cm = matriz
-
-# Calcula a taxa de falsos positivos por classe
-fpr_class_0 = cm[0][1] / (cm[0][1] + cm[0][0] + cm[0][2])  # Classe 0
-fpr_class_1 = cm[1][0] / (cm[1][0] + cm[1][1] + cm[1][2])  # Classe 1
-fpr_class_2 = cm[2][0] / (cm[2][0] + cm[2][1] + cm[2][2])  # Classe 2
-
-# Exibe a taxa de falsos positivos por classe
+fpr_class_0 = cm[0][1] / (cm[0][1] + cm[0][0] + cm[0][2])
+fpr_class_1 = cm[1][0] / (cm[1][0] + cm[1][1] + cm[1][2])
+fpr_class_2 = cm[2][0] / (cm[2][0] + cm[2][1] + cm[2][2])
 print("Taxa de Falsos Positivos - Classe 0:", fpr_class_0)
 print("Taxa de Falsos Positivos - Classe 1:", fpr_class_1)
 print("Taxa de Falsos Positivos - Classe 2:", fpr_class_2)

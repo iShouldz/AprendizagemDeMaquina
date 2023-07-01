@@ -1,11 +1,11 @@
 import math
 
-from sklearn.datasets import load_wine
+from sklearn.datasets import load_wine, load_iris
 from sklearn.model_selection import train_test_split
 from sklearn.neighbors import KNeighborsClassifier
 import numpy as np
 
-x, y = load_wine(return_X_y=True)
+x, y = load_iris(return_X_y=True)
 
 def holdout100():
     holdout = []
@@ -26,6 +26,7 @@ def holdout100():
         knn2.fit(x_treino2, y_treino)
         resultado = knn2.predict(x_teste2)
         holdoutSemColuna.append(verificarAcerto(resultado, y_teste))
+
     return holdout, holdoutSemColuna
 
 def verificarAcerto(arrayClassificadoByKNN, arrayClassificadoTeste):
@@ -39,8 +40,8 @@ def removerUltimaColuna(x_treino, x_teste):
     novoXTreino = []
     novoXTeste = []
     for i in range(len(x_teste)):
-        novoXTreino.append(np.delete(x_treino[i], [12]))
-        novoXTeste.append(np.delete(x_teste[i], [12]))
+        novoXTreino.append(np.delete(x_treino[i], [0]))
+        novoXTeste.append(np.delete(x_teste[i], [0]))
     return novoXTreino, novoXTeste
 
 def diferencaTaxaDeAcerto(vetorA, vetorB):

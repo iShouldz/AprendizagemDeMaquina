@@ -44,6 +44,14 @@ def removerUltimaColuna(x_treino, x_teste):
         novoXTeste.append(np.delete(x_teste[i], [0]))
     return novoXTreino, novoXTeste
 
+def remover12Coluna(x_treino, x_teste):
+    novoXTreino = []
+    novoXTeste = []
+    for i in range(len(x_teste)):
+        novoXTreino.append(np.delete(x_treino[i], [0, 1]))
+        novoXTeste.append(np.delete(x_teste[i], [0, 1]))
+    return novoXTreino, novoXTeste
+
 def diferencaTaxaDeAcerto(vetorA, vetorB):
     vetorDiferenca = []
     for i in range(len(vetorA)):

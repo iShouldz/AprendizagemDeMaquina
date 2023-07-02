@@ -3,9 +3,11 @@
 Repositorio referente as listas de exercicio da disciplina de **aprendizagem de máquina**
 
 ### Atualizações do repositorio
-
--[X]Lista 04_AM
--[ ]Lista 05_AM
+- [x] Lista 01_AM
+- [x] Lista 02_AM
+- [x] Lista 03_AM
+- [x] Lista 04_AM
+- [ ] Lista 05_AM
 
 ### Tecnologias utilizadas para implementação 
 1. Python

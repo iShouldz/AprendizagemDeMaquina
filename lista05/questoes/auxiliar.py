@@ -5,7 +5,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.neighbors import KNeighborsClassifier
 import numpy as np
 
-x, y = load_iris(return_X_y=True)
+x, y = load_wine(return_X_y=True)
 
 def holdout100():
     holdout = []
@@ -50,6 +50,22 @@ def remover12Coluna(x_treino, x_teste):
     for i in range(len(x_teste)):
         novoXTreino.append(np.delete(x_treino[i], [0, 1]))
         novoXTeste.append(np.delete(x_teste[i], [0, 1]))
+    return novoXTreino, novoXTeste
+
+def removerSegundaTerceira(x_treino, x_teste):
+    novoXTreino = []
+    novoXTeste = []
+    for i in range(len(x_teste)):
+        novoXTreino.append(np.delete(x_treino[i], [1, 2]))
+        novoXTeste.append(np.delete(x_teste[i], [1, 2]))
+    return novoXTreino, novoXTeste
+
+def removerPrimeiraETerceira(x_treino, x_teste):
+    novoXTreino = []
+    novoXTeste = []
+    for i in range(len(x_teste)):
+        novoXTreino.append(np.delete(x_treino[i], [0, 2]))
+        novoXTeste.append(np.delete(x_teste[i], [0, 2]))
     return novoXTreino, novoXTeste
 
 def diferencaTaxaDeAcerto(vetorA, vetorB):

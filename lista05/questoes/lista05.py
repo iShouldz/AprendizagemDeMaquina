@@ -1,13 +1,15 @@
 import auxiliar
 
-"""
+
 resultado, resultadoSemColuna = auxiliar.holdout100()
 
 print("RESULTADO COM COLUNA")
 print(resultado)
+print(f"Media: {auxiliar.mediaamostra(resultado)}")
 
 print("RESULTADO SEM COLUNA")
 print(resultadoSemColuna)
+print(f"Media: {auxiliar.mediaamostra(resultadoSemColuna)}")
 
 print("DIFERENÇAS DAS TAXAS DE ACERTO (COM COLUNA - SEM COLUNA)")
 print(auxiliar.diferencaTaxaDeAcerto(resultado, resultadoSemColuna))
@@ -29,7 +31,6 @@ print("Media: ")
 print(auxiliar.mediaamostra(resultadoSemColuna))
 
 """
-
 resultadoIris, resultadoIrisSemColuna = auxiliar.holdout100()
 
 print("INTERVALO DE CONFIANÇA BASE IRIS")
@@ -39,3 +40,4 @@ print("INTERVALO DE CONFIANÇA BASE IRIS SEM A PRIMEIRA COLUNA")
 print(auxiliar.intervaloDeConfianca(resultadoIrisSemColuna))
 
 print("INTERVALO DE CONFIANÇA BASE IRIS SEM A PRIMEIRA E SEGUNDA COLUNA")
+"""

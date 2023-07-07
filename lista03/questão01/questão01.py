@@ -6,6 +6,7 @@ da distância euclidiana.
 '''
 
 import auxiliar, baseDeDados
+import lista05.questoes.auxiliar
 
 x_treino = baseDeDados.baseIris_Treinamento("w").tolist()
 y_treino = baseDeDados.baseIris_Classificadores_Treinamento("w").tolist()
@@ -27,6 +28,9 @@ print("Taxa de Acerto: " + str(baseDeDados.verificarAcerto(resultado, y_teste)._
 semColuna = baseDeDados.removidoTreino()
 semColunaTeste = baseDeDados.removidoTeste()
 
+
+
+'''
 resultado = auxiliar.knn(x_treino, y_treino, x_teste, 3, False)
 print("Taxa de acerto para 3-NN - SEM PESO: ", baseDeDados.verificarAcerto(resultado, y_teste))
 resultado = auxiliar.knn(x_treino, y_treino, x_teste, 3, True)
@@ -85,7 +89,7 @@ resultado = auxiliar.knn(semColuna, y_treino, semColunaTeste, 8, False)
 print("Taxa de acerto para 8-NN - SEM PESO: (SEM A ULTIMA COLUNA)", baseDeDados.verificarAcerto(resultado, y_teste))
 resultado = auxiliar.knn(semColuna, y_treino, semColunaTeste, 8, True)
 print("Taxa de acerto para 8-NN - COM PESO: (SEM A ULTIMA COLUNA)", baseDeDados.verificarAcerto(resultado, y_teste))
-
+'''
 
 
 

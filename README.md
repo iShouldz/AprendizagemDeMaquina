@@ -14,4 +14,4 @@ Repositorio referente as listas de exercicio da disciplina de **aprendizagem de 
 1. Python
 2. PyCharm Profissional 2022.3.3
 
-[Resolução das listas](https://drive.google.com/drive/folders/1qLa-1w0r6v-A6-yEue8RQmZ2XdFE1ju_?usp=drive_link)
+[Resolução das listas](https://drive.google.com/drive/folders/1exszd8b56_D1dJc1LhvrFNNzTbpOOIjz?usp=sharing)

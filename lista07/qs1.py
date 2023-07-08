@@ -2,26 +2,26 @@
 Converta todos os atributos da base para numéricos.
 
 """
+import numpy as np
+from sklearn.model_selection import train_test_split
 
 def imprimir():
     for i in studentsSplitados:
         print(i)
 
-
 studentsSplitados = []
 students = open("student-mat.csv", "r")
 linhasEstudantes = students.readlines()
+copia_d = []
 
 #Splita pelo ; para poder ter colunas para tratar
 for i in linhasEstudantes:
     teste = i.split(";")
     studentsSplitados.append(teste)
-print(studentsSplitados[1][31])
 
-
-
-for i in studentsSplitados:
-    print(i)
+copia_d = studentsSplitados
+del copia_d[0]
+#copia_d = np.array(copia_d)
 
 for i in range(len(studentsSplitados)):
     # Tratando primeira coluna
@@ -483,4 +483,34 @@ for i in range(len(studentsSplitados)):
         studentsSplitados[i][45] = 19
     elif studentsSplitados[i][45] == '20\n':
         studentsSplitados[i][45] = 20
-imprimir()
+del studentsSplitados[0]
+# del studentsSplitados[0]
+#imprimir()
+"""
+array2 = np.array(studentsSplitados)
+treino, teste = np.split(array2, 2)
+"""
+studensNp = np.array(studentsSplitados)
+
+def separarX(data):
+    studentsX = []
+    for i in range(len(data)):
+        studentsX.append(np.delete(data[i], [45]))
+    return studentsX
+
+def separarY(data):
+    studentsY = []
+    for i in range(len(data)):
+        studentsY.append(np.delete(data[i], [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
+                                             20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36,
+                                             37, 38, 39, 40, 41, 42, 43, 44]))
+    studentsY = np.array(studentsY)
+    return studentsY
+
+estudantesX = separarX(studensNp)
+estudantesY = separarY(studensNp)
+estudantesY = estudantesY.ravel()
+
+def studentsTreinoTeste():
+    x_treino, x_teste, y_treino, y_teste = train_test_split(estudantesX, estudantesY, test_size=0.5)
+    return x_treino, x_teste, y_treino, y_teste

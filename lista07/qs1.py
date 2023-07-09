@@ -484,12 +484,18 @@ for i in range(len(studentsSplitados)):
     elif studentsSplitados[i][45] == '20\n':
         studentsSplitados[i][45] = 20
 del studentsSplitados[0]
-# del studentsSplitados[0]
+copiaQs2 = studentsSplitados
 #imprimir()
-"""
-array2 = np.array(studentsSplitados)
-treino, teste = np.split(array2, 2)
-"""
+
+"""Para qs2, assumo que se a classificação for acima de 10, então 1, do contrario 0"""
+for i in range(len(copiaQs2)):
+    if copiaQs2[i][45] > 10:
+        copiaQs2[i][45] = 1
+    else:
+        copiaQs2[i][45] = 0
+
+# imprimir()
+qs2 = np.array(copiaQs2)
 studensNp = np.array(studentsSplitados)
 
 def separarX(data):
@@ -511,6 +517,14 @@ estudantesX = separarX(studensNp)
 estudantesY = separarY(studensNp)
 estudantesY = estudantesY.ravel()
 
+qs2estudantesX = separarX(qs2)
+qs2estudantesY = separarY(qs2)
+qs2estudantesY = qs2estudantesY.ravel()
+
 def studentsTreinoTeste():
     x_treino, x_teste, y_treino, y_teste = train_test_split(estudantesX, estudantesY, test_size=0.5)
+    return x_treino, x_teste, y_treino, y_teste
+
+def qs2Binario():
+    x_treino, x_teste, y_treino, y_teste = train_test_split(qs2estudantesX, qs2estudantesY, test_size=0.5)
     return x_treino, x_teste, y_treino, y_teste

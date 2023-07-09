@@ -2,7 +2,7 @@ import numpy as np
 from sklearn.model_selection import train_test_split
 
 studentsSplitados = []
-students = open("student-mat.csv", "r")
+students = open("../student-mat.csv", "r")
 linhasEstudantes = students.readlines()
 
 #Splita pelo ; para poder ter colunas para tratar

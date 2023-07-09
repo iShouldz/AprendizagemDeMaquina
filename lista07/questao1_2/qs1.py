@@ -10,7 +10,7 @@ def imprimir():
         print(i)
 
 studentsSplitados = []
-students = open("student-mat.csv", "r")
+students = open("../student-mat.csv", "r")
 linhasEstudantes = students.readlines()
 copia_d = []
 

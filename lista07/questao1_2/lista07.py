@@ -1,6 +1,6 @@
 import qs1
 import auxiliar_d
-from lista05.questoes.auxiliar import verificarAcerto, intervaloDeConfianca
+from lista05.questoes.auxiliar import intervaloDeConfianca
 from sklearn.metrics import mean_squared_error
 from sklearn.neighbors import KNeighborsClassifier
 

@@ -18,7 +18,7 @@ for i in linhasFlorest:
     teste = i.split(",")
     florestSplitados.append(teste)
 
-imprimir()
+#imprimir()
 del florestSplitados[0]
 #Percorrer para realizar alteração
 for i in range(len(florestSplitados)):
@@ -142,11 +142,16 @@ def separarY(data):
     for i in range(len(data)):
         studentsY.append(np.delete(data[i], [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]))
     studentsY = np.array(studentsY)
+    print(studentsY)
+    #Calculando log para todo conjunto de Y
+    for i in range(len(studentsY)):
+        studentsY[i] = np.log(studentsY[i] + 1)
+    print(studentsY)
     return studentsY
 
 florestX = separarX(vetorrr)
 florestY = separarY(vetorrr)
-florestY = florestY .ravel()
+florestY = florestY.ravel()
 
 def florestTreinoTeste():
     x_treino, x_teste, y_treino, y_teste = train_test_split(florestX, florestY, test_size=0.5)
@@ -155,3 +160,6 @@ def florestTreinoTeste():
     y_treino_transformado = lab.fit_transform(y_treino)
     return x_treino, x_teste, y_treino_transformado, y_teste_transformado
 
+def florestTreinoTesteSemTransformarBiblioteca():
+    x_treino, x_teste, y_treino, y_teste = train_test_split(florestX, florestY, test_size=0.5)
+    return x_treino, x_teste, y_treino, y_teste

@@ -140,27 +140,17 @@ for i in range(len(naoBinaria)):
         naoBinaria[i].insert(20, 0)
     naoBinaria[i].remove(remover6)
 
-    #Class
+    #Class, deixando como categorico
+
     if naoBinaria[i][21] == 'unacc\n':
-        naoBinaria[i].insert(21, 1)
-    else:
-        naoBinaria[i].insert(21, 0)
+        naoBinaria[i][21] = 'unacc'
+    elif naoBinaria[i][21] == 'acc\n':
+        naoBinaria[i][21] = 'acc'
+    elif naoBinaria[i][21] == 'good\n':
+        naoBinaria[i][21] = 'good'
+    elif naoBinaria[i][21] == 'vgood\n':
+        naoBinaria[i][21] = 'vgood'
 
-    if naoBinaria[i][22] == 'acc\n':
-        naoBinaria[i].insert(22, 1)
-    else:
-        naoBinaria[i].insert(22, 0)
-
-    if naoBinaria[i][23] == 'good\n':
-        naoBinaria[i].insert(23, 1)
-    else:
-        naoBinaria[i].insert(23, 0)
-
-    if naoBinaria[i][24] == 'vgood\n':
-        naoBinaria[i].insert(24, 1)
-    else:
-        naoBinaria[i].insert(24, 0)
-    naoBinaria[i].remove(remover7)
     #print(naoBinaria[i])
 
 imprimir(naoBinaria)

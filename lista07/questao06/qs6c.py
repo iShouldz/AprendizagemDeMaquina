@@ -1,4 +1,4 @@
-
+from questao06 import
 
 def holdout100():
     holdout = []

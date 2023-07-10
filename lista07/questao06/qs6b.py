@@ -146,17 +146,17 @@ for i in range(len(naoBinaria)):
     #Class, deixando como categorico
 
     if naoBinaria[i][21] == 'unacc\n':
-        naoBinaria[i][21] = 'unacc'
+        naoBinaria[i][21] = 1
     elif naoBinaria[i][21] == 'acc\n':
-        naoBinaria[i][21] = 'acc'
+        naoBinaria[i][21] = 2
     elif naoBinaria[i][21] == 'good\n':
-        naoBinaria[i][21] = 'good'
+        naoBinaria[i][21] = 3
     elif naoBinaria[i][21] == 'vgood\n':
-        naoBinaria[i][21] = 'vgood'
+        naoBinaria[i][21] = 4
 
     #print(naoBinaria[i])
 
-imprimir(naoBinaria)
+#imprimir(naoBinaria)
 vetor = np.array(naoBinaria)
 
 def separarX(data):

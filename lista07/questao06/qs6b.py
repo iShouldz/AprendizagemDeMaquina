@@ -1,3 +1,6 @@
+from sklearn.model_selection import train_test_split
+import numpy as np
+
 naoBinaria = []
 carro = open("../car.data", "r")
 linhaCarro = carro.readlines()
@@ -154,3 +157,26 @@ for i in range(len(naoBinaria)):
     #print(naoBinaria[i])
 
 imprimir(naoBinaria)
+vetor = np.array(naoBinaria)
+
+def separarX(data):
+    studentsX = []
+    for i in range(len(data)):
+        studentsX.append(np.delete(data[i], [21]))
+    return studentsX
+
+def separarY(data):
+    studentsY = []
+    for i in range(len(data)):
+        studentsY.append(np.delete(data[i], [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16,
+                                             17, 18, 19, 20]))
+    studentsY = np.array(studentsY)
+    return studentsY
+
+florestX = separarX(vetor)
+florestY = separarY(vetor)
+florestY = florestY.ravel()
+
+def florestTreinoTeste():
+    x_treino, x_teste, y_treino, y_teste = train_test_split(florestX, florestY, test_size=0.5)
+    return x_treino, x_teste, y_treino, y_teste

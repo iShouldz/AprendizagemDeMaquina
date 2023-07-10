@@ -1,3 +1,6 @@
+from sklearn.model_selection import train_test_split
+import numpy as np
+
 carrosSplitados = []
 carro = open("../car.data", "r")
 linhaCarro = carro.readlines()
@@ -78,3 +81,25 @@ for i in range(len(carrosSplitados)):
         carrosSplitados[i][6] = 4
 imprimir(carrosSplitados)
 
+vetor = np.array(carrosSplitados)
+
+def separarX(data):
+    studentsX = []
+    for i in range(len(data)):
+        studentsX.append(np.delete(data[i], [6]))
+    return studentsX
+
+def separarY(data):
+    studentsY = []
+    for i in range(len(data)):
+        studentsY.append(np.delete(data[i], [0, 1, 2, 3, 4, 5]))
+    studentsY = np.array(studentsY)
+    return studentsY
+
+florestX = separarX(vetor)
+florestY = separarY(vetor)
+florestY = florestY.ravel()
+
+def florestTreinoTeste():
+    x_treino, x_teste, y_treino, y_teste = train_test_split(florestX, florestY, test_size=0.5)
+    return x_treino, x_teste, y_treino, y_teste

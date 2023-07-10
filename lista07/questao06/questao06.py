@@ -100,6 +100,6 @@ florestX = separarX(vetor)
 florestY = separarY(vetor)
 florestY = florestY.ravel()
 
-def florestTreinoTeste():
+def ordinalTreinoTeste():
     x_treino, x_teste, y_treino, y_teste = train_test_split(florestX, florestY, test_size=0.5)
     return x_treino, x_teste, y_treino, y_teste

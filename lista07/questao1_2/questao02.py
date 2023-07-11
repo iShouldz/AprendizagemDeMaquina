@@ -5,7 +5,7 @@ from sklearn.neighbors import KNeighborsClassifier
 def holdout100():
     holdout = []
     for i in range(100):
-        """100 holdout 50/50 base wine completa"""
+        """100 holdout 50/50 base student completa"""
         x_treino, x_teste, y_treino, y_teste = qs1.qs2Binario()
         knn = KNeighborsClassifier(n_neighbors=1)
         knn.fit(x_treino, y_treino)

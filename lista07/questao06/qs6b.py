@@ -156,7 +156,7 @@ for i in range(len(naoBinaria)):
 
     #print(naoBinaria[i])
 
-#imprimir(naoBinaria)
+imprimir(naoBinaria)
 vetor = np.array(naoBinaria)
 
 def separarX(data):

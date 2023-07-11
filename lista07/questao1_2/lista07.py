@@ -1,6 +1,6 @@
 import qs1
 import auxiliar_d
-from lista05.questoes.auxiliar import intervaloDeConfianca
+from lista05.questoes.auxiliar import intervaloDeConfianca, mediaamostra
 from sklearn.metrics import mean_squared_error
 from sklearn.neighbors import KNeighborsClassifier
 
@@ -17,6 +17,9 @@ def holdout100():
         rmseArray.append(rmse)
     return rmseArray
 
+hold = holdout100()
+media = mediaamostra(hold)
+print(f"Media: {media}")
 print(f"Intervalo de confiança para RMSE 100 - Holdout 50/50\n{intervaloDeConfianca(holdout100())}")
 
 def holdout100Numerico():
@@ -30,6 +33,8 @@ def holdout100Numerico():
         rmse = mean_squared_error(y_teste, resultado, squared=False)
         rmseArray.append(rmse)
     return rmseArray
-
+hold = holdout100Numerico()
+media = mediaamostra(hold)
+print(f"Media: {media}")
 print(f"Intervalo de confiança para RMSE 100, com base apenas numerica"
       f" - Holdout 50/50\n{intervaloDeConfianca(holdout100Numerico())}")

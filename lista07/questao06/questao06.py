@@ -78,7 +78,7 @@ for i in range(len(carrosSplitados)):
     elif carrosSplitados[i][6] == 'good\n':
         carrosSplitados[i][6] = 3
     elif carrosSplitados[i][6] == 'vgood\n':
-        carrosSplitados[i][6] = 4
+        carrosSplitados[i][6] = 0o1
 imprimir(carrosSplitados)
 
 vetor = np.array(carrosSplitados)

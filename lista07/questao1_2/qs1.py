@@ -494,7 +494,7 @@ for i in range(len(copiaQs2)):
     else:
         copiaQs2[i][45] = 0
 
-# imprimir()
+imprimir()
 qs2 = np.array(copiaQs2)
 studensNp = np.array(studentsSplitados)
 
@@ -502,6 +502,7 @@ def separarX(data):
     studentsX = []
     for i in range(len(data)):
         studentsX.append(np.delete(data[i], [45]))
+    studentsX = np.array(studentsX)
     return studentsX
 
 def separarY(data):

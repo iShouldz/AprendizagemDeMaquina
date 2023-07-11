@@ -3,6 +3,7 @@ from sklearn.model_selection import train_test_split
 import numpy as np
 from sklearn import preprocessing
 from sklearn import utils
+from sklearn.preprocessing import MinMaxScaler
 
 florestSplitados = []
 florest = open("../forestfires.csv", "r")
@@ -129,7 +130,12 @@ for i in range(len(florestSplitados)):
 
 #Convertendo strings para float
 vetorNp = np.array(florestSplitados)
-vetorrr = vetorNp.astype('float')
+vetorrr = vetorNp.astype(float)
+#imprimir()
+#print(type(vetorrr[0][0]))
+#print(vetorrr)
+#vetorrr = MinMaxScaler().fit_transform(vetorrr)
+
 
 def separarX(data):
     studentsX = []
@@ -160,7 +166,10 @@ def florestTreinoTesteSemTransformarBiblioteca():
     x_treino, x_teste, y_treino, y_teste = train_test_split(florestX, florestY, test_size=0.5)
     # Calculando log para todo conjunto de Y
     for i in range(len(y_teste) - 1):
+        print(f"Int{int(math.log(y_teste[i] + 1, 10))}")
+        print(f"Sem o int{math.log(y_teste[i] + 1, 10)}")
         y_teste[i] = int(math.log(y_teste[i] + 1, 10))
         y_treino[i] = int(math.log(y_treino[i] + 1, 10))
-
+   # print(y_teste)'''
+    #print(f"treino: {y_treino}")
     return x_treino, x_teste, y_treino, y_teste

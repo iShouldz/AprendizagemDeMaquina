@@ -1,4 +1,4 @@
-# Aprendizagem De Maquina
+# Aprendizagem de Máquina
 
 Repositorio referente as listas de exercicio da disciplina de **aprendizagem de máquina**
 

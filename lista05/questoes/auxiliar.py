@@ -4,6 +4,8 @@ from sklearn.datasets import load_wine, load_iris
 from sklearn.model_selection import train_test_split
 from sklearn.neighbors import KNeighborsClassifier
 import numpy as np
+import statsmodels.api as sm
+
 
 x, y = load_wine(return_X_y=True)
 
@@ -95,10 +97,14 @@ def desviopadraoamostral(vetor):
     return soma/len(vetor)
 
 def intervaloDeConfianca(vetor):
+
+    '''
     media = mediaamostra(vetor)
     desvio = calcular_desvio_padrao_amostral(vetor)
     ladoa = (media - 1.96 * desvio)
     ladob = (media + 1.96 * desvio)
 
     return "[" + str(ladoa) + "; " + str(ladob) + "]"
+    '''
+    return sm.stats.DescrStatsW(vetor).tconfint_mean(alpha=0.05)
 

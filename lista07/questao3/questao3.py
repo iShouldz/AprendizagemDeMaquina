@@ -1,6 +1,6 @@
 from lista05.questoes.auxiliar import intervaloDeConfianca
 from sklearn.metrics import mean_squared_error
-from sklearn.neighbors import KNeighborsClassifier
+from sklearn.neighbors import KNeighborsClassifier, KNeighborsRegressor
 from suporteqs3 import florestTreinoTeste, florestTreinoTesteSemTransformarBiblioteca
 from sklearn.feature_selection import RFE
 from sklearn.linear_model import LogisticRegression
@@ -24,13 +24,10 @@ def holdout100_():
 
         """100 holdout 50/50 base florest"""
         x_treino, x_teste, y_treino, y_teste = florestTreinoTesteSemTransformarBiblioteca()
-        clf = LogisticRegression(random_state=0).fit(x_treino, y_treino)
-        resultado = clf.predict(x_teste)
-        '''
-        knn = KNeighborsClassifier(n_neighbors=1)
+        knn = KNeighborsRegressor(n_neighbors=1)
         knn.fit(x_treino, y_treino)
-        resultado = knn.predict(x_teste)'''
-        print(resultado)
+        resultado = knn.predict(x_teste)
+        #print(resultado)
         rmse = mean_squared_error(y_teste, resultado, squared=False)
         rmseArray.append(rmse)
     return rmseArray

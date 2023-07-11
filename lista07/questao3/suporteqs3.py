@@ -166,8 +166,8 @@ def florestTreinoTesteSemTransformarBiblioteca():
     x_treino, x_teste, y_treino, y_teste = train_test_split(florestX, florestY, test_size=0.5)
     # Calculando log para todo conjunto de Y
     for i in range(len(y_teste) - 1):
-        print(f"Int{int(math.log(y_teste[i] + 1, 10))}")
-        print(f"Sem o int{math.log(y_teste[i] + 1, 10)}")
+        #print(f"Int{int(math.log(y_teste[i] + 1, 10))}")
+        #print(f"Sem o int{math.log(y_teste[i] + 1, 10)}")
         y_teste[i] = int(math.log(y_teste[i] + 1, 10))
         y_treino[i] = int(math.log(y_treino[i] + 1, 10))
    # print(y_teste)'''

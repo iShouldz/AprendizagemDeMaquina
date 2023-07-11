@@ -8,7 +8,7 @@ Repositorio referente as listas de exercicio da disciplina de **aprendizagem de 
 - [x] Lista 03_AM
 - [x] Lista 04_AM
 - [x] Lista 05_AM
-- [ ] Lista 07_AM
+- [x] Lista 07_AM
 
 ### Tecnologias utilizadas para implementação 
 1. Python

@@ -3,7 +3,7 @@ from sklearn.model_selection import train_test_split
 
 baseSplitados = []
 
-base = open('IrisSaida.csv', 'r')
+base = open('irisSaida.csv', 'r')
 linhas = base.readlines()
 del linhas[0]
 

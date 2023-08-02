@@ -1,8 +1,11 @@
 import pandas as pd
+from sklearn.neighbors import KNeighborsClassifier
+from lista05.questoes.auxiliar import intervaloDeConfianca, verificarAcerto
+from sklearn.model_selection import train_test_split
+import aux_lista06q1
 
 data_iris = pd.read_csv("iris.txt")
 data_iris.columns = ['SepalLengthCm', 'SepalWidthCm', 'PetalLengthCm', 'PetalWidthCm', 'Species']
-print(data_iris)
 
 
 SepalLength_min_index = data_iris[(data_iris['SepalLengthCm'] < 5.84)].index
@@ -44,4 +47,17 @@ data_iris.loc[PetalWidthCm_max_index, 'PetalWidthCm'] = 'max'
 data_iris.loc[PetalWidthCm_mean_index, 'PetalWidthCm'] = 'mean'
 
 csv = data_iris.to_csv(r'irisSaida.csv')
-print(data_iris)
+
+
+def holdout100():
+    holdout = []
+    for i in range(100):
+        """100 holdout 50/50 base iris"""
+        x_treino, x_teste, y_treino, y_teste = aux_lista06q1.irisTreinoTeste()
+        knn = KNeighborsClassifier(n_neighbors=1, metric='hamming')
+        knn.fit(x_treino, y_treino)
+        resultado = knn.predict(x_teste)
+        holdout.append(verificarAcerto(resultado, y_teste))
+    return holdout
+
+print(f"Intervalo de confiança - Holdout 50/50\n{intervaloDeConfianca(holdout100())}")

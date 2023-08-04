@@ -48,7 +48,7 @@ data_iris.loc[PetalWidthCm_max_index, 'PetalWidthCm'] = 'max'
 data_iris.loc[PetalWidthCm_mean_index, 'PetalWidthCm'] = 'mean'
 
 csv = data_iris.to_csv(r'irisSaida.csv')
-
+print(data_iris)
 X, y = load_iris(return_X_y=True)
 
 def holdout100():
@@ -75,4 +75,4 @@ def holdout100IrisNormal():
         holdout.append(verificarAcerto(resultado, y_teste))
     return holdout
 
-print(f"Intervalo de confiança - Holdout 50/50\n{intervaloDeConfianca(holdout100IrisNormal())}")
+print(f"Intervalo de confiança - Holdout 50/50 EUCLIDIANA\n{intervaloDeConfianca(holdout100IrisNormal())}")

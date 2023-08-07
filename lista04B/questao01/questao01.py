@@ -1,31 +1,15 @@
 from sklearn.neighbors import KNeighborsClassifier
 from lista05.questoes.auxiliar import intervaloDeConfianca, mediaamostra
 from sklearn.datasets import load_wine
-from sklearn.model_selection import train_test_split
+from statistics import mean
 from sklearn.metrics import accuracy_score
 import numpy as np
+import lista04B.questao02.auxiliar as aux
 
 X, y = load_wine(return_X_y=True)
+x_ = aux.carregar_wine()
 
-def dividir_dados_treino_teste(X, y, tamanho_teste=0.2, random_state=None):
-    """
-    Divide a base de dados em conjuntos de treino e teste usando Holdout.
-
-    Parâmetros:
-        X (numpy.ndarray): Matriz de características (amostras x atributos).
-        y (numpy.ndarray): Vetor de rótulos/classes (amostras x 1).
-        proporcao_teste (float): Proporção dos dados para o conjunto de teste (0 < proporcao_teste < 1).
-        random_state (int ou None): Seed para o gerador de números aleatórios (opcional).
-
-    Retorna:
-        X_treino (numpy.ndarray): Conjunto de treino (amostras x atributos).
-        X_teste (numpy.ndarray): Conjunto de teste (amostras x atributos).
-        y_treino (numpy.ndarray): Rótulos/classes do conjunto de treino (amostras x 1).
-        y_teste (numpy.ndarray): Rótulos/classes do conjunto de teste (amostras x 1).
-    """
-    if random_state is not None:
-        np.random.seed(random_state)
-
+def dividir_dados_treino_teste(X, y, tamanho_teste=0.2):
     num_amostras = X.shape[0]
     num_amostras_teste = int(num_amostras * tamanho_teste)
 
@@ -38,36 +22,13 @@ def dividir_dados_treino_teste(X, y, tamanho_teste=0.2, random_state=None):
 
     return X_treino, X_teste, y_treino, y_teste
 
-def holdout_estratificado(X, y, tamanho_teste=0.2, random_state=None):
-    """
-    Divide a base de dados em conjunto de treino e teste usando Holdout estratificado.
-
-    Parâmetros:
-        X (array-like): Conjunto de características (atributos).
-        y (array-like): Conjunto de rótulos (classes).
-        tamanho_teste (float): Tamanho da proporção dos dados de teste (padrão é 0.2).
-        random_state (int ou None): Semente para controle da aleatoriedade (padrão é None).
-
-    Retorna:
-        X_treino (array-like): Conjunto de características de treino.
-        X_teste (array-like): Conjunto de características de teste.
-        y_treino (array-like): Conjunto de rótulos de treino.
-        y_teste (array-like): Conjunto de rótulos de teste.
-    """
-    # Verifica se os tamanhos de X e y são compatíveis
-    if len(X) != len(y):
-        raise ValueError("Os conjuntos X e y devem ter o mesmo número de amostras.")
-
-    # Calcula o número de amostras no conjunto de teste
+def holdout_estratificado(X, y, tamanho_teste=0.2):
     num_teste = int(len(X) * tamanho_teste)
-
     # Embaralha os índices das amostras
     indices_embaralhados = np.arange(len(X))
-    if random_state is not None:
-        np.random.seed(random_state)
     np.random.shuffle(indices_embaralhados)
 
-    # Separa as amostras de treino e teste de forma estratificada
+    # Separa as amostras
     y_unicos = np.unique(y)
     qtd_amostras_classe = num_teste // len(y_unicos)
 
@@ -76,15 +37,11 @@ def holdout_estratificado(X, y, tamanho_teste=0.2, random_state=None):
         indices_classe = np.where(y == classe)[0]
         indices_classe_teste = indices_classe[:qtd_amostras_classe]
         indices_teste.extend(indices_classe_teste)
-
-    # Garante que a quantidade de amostras no conjunto de teste seja exatamente num_teste
     indices_teste_extra = indices_embaralhados[:num_teste - len(indices_teste)]
     indices_teste.extend(indices_teste_extra)
-
-    # Obtém os índices das amostras de treino
+    # índices das amostras de treino
     indices_treino = list(set(indices_embaralhados) - set(indices_teste))
 
-    # Faz a divisão dos conjuntos de treino e teste
     X_treino = X[indices_treino]
     y_treino = y[indices_treino]
     X_teste = X[indices_teste]
@@ -92,7 +49,7 @@ def holdout_estratificado(X, y, tamanho_teste=0.2, random_state=None):
 
     return X_treino, X_teste, y_treino, y_teste
 
-def holdout(type):
+def get_holdout(type, X, y):
     holdout = []
     for i in range(10):
         if type == "aleatorio":
@@ -112,121 +69,24 @@ def somaFold(lista):
     return total
 
 def leave_one_out(X, y):
-    """
-    Realiza leave-one-out cross-validation.
-
-    Parâmetros:
-        X (array-like): Conjunto de características (atributos).
-        y (array-like): Conjunto de rótulos (classes).
-
-    Retorna:
-        acuracias (array-like): Lista das acurácias obtidas em cada rodada.
-    """
-    # Verifica se os tamanhos de X e y são compatíveis
-    if len(X) != len(y):
-        raise ValueError("Os conjuntos X e y devem ter o mesmo número de amostras.")
-
-    # Inicializa a lista para armazenar as acurácias
-    acuracias = []
-
-    # Realiza o leave-one-out cross-validation
+    taxaAcerto = []
     for i in range(len(X)):
-        # Define o conjunto de teste (uma única amostra)
+        # Conjunto de teste por partição
         X_teste = X[i:i+1]
         y_teste = y[i:i+1]
 
-        # Define o conjunto de treino (todas as outras amostras)
+        # Conjunto de treino, as demais partições
         X_treino = np.delete(X, i, axis=0)
         y_treino = np.delete(y, i)
 
-        # Treina o modelo e avalia a acurácia
-        # (neste exemplo, considere que você tenha um modelo de classificação chamado "modelo")
-        modelo = KNeighborsClassifier(n_neighbors=1)
-        modelo.fit(X_treino, y_treino)
-        acuracia = modelo.score(X_teste, y_teste)
+        knn = KNeighborsClassifier(n_neighbors=1)
+        knn.fit(X_treino, y_treino)
+        acuracia = knn.score(X_teste, y_teste)
 
-        # Armazena a acurácia na lista de resultados
-        acuracias.append(acuracia)
+        taxaAcerto.append(acuracia)
+    return taxaAcerto
 
-    return acuracias
-
-def cross_validation(X, y, num_folds=10, random_state=None):
-    """
-    Realiza 10-fold cross-validation.
-
-    Parâmetros:
-        X (array-like): Conjunto de características (atributos).
-        y (array-like): Conjunto de rótulos (classes).
-        num_folds (int): Número de folds (padrão é 10).
-        random_state (int ou None): Semente para controle da aleatoriedade (padrão é None).
-
-    Retorna:
-        acuracias (array-like): Lista das acurácias obtidas em cada fold.
-    """
-    # Verifica se os tamanhos de X e y são compatíveis
-    if len(X) != len(y):
-        raise ValueError("Os conjuntos X e y devem ter o mesmo número de amostras.")
-
-    # Calcula o tamanho de cada fold
-    tamanho_fold = len(X) // num_folds
-
-    # Embaralha os índices das amostras
-    indices_embaralhados = np.arange(len(X))
-    if random_state is not None:
-        np.random.seed(random_state)
-    np.random.shuffle(indices_embaralhados)
-
-    # Inicializa a lista para armazenar as acurácias
-    acuracias = []
-
-    # Realiza o 10-fold cross-validation
-    for i in range(num_folds):
-        # Calcula os índices dos dados do fold atual
-        inicio_fold = i * tamanho_fold
-        fim_fold = (i + 1) * tamanho_fold
-        indices_teste = indices_embaralhados[inicio_fold:fim_fold]
-
-        # Garante que a quantidade de amostras no conjunto de teste seja exatamente tamanho_fold
-        if i == num_folds - 1:
-            indices_teste = indices_embaralhados[inicio_fold:]
-
-        # Obtém os índices dos dados de treino
-        indices_treino = list(set(indices_embaralhados) - set(indices_teste))
-
-        # Faz a divisão dos conjuntos de treino e teste
-        X_treino = X[indices_treino]
-        y_treino = y[indices_treino]
-        X_teste = X[indices_teste]
-        y_teste = y[indices_teste]
-
-        # Treina o modelo e avalia a acurácia
-        # (neste exemplo, considere que você tenha um modelo de classificação chamado "modelo")
-        modelo = KNeighborsClassifier(n_neighbors=1)
-        modelo.fit(X_treino, y_treino)
-        acuracia = modelo.score(X_teste, y_teste)
-
-        # Armazena a acurácia na lista de resultados
-        acuracias.append(acuracia)
-
-    return acuracias
 def cross_validation_estratificado(X, y, num_folds=10, random_state=None):
-    """
-    Realiza 10-fold cross-validation estratificado.
-
-    Parâmetros:
-        X (array-like): Conjunto de características (atributos).
-        y (array-like): Conjunto de rótulos (classes).
-        num_folds (int): Número de folds (padrão é 10).
-        random_state (int ou None): Semente para controle da aleatoriedade (padrão é None).
-
-    Retorna:
-        acuracias (array-like): Lista das acurácias obtidas em cada fold.
-    """
-    # Verifica se os tamanhos de X e y são compatíveis
-    if len(X) != len(y):
-        raise ValueError("Os conjuntos X e y devem ter o mesmo número de amostras.")
-
-    # Calcula o tamanho de cada fold
     tamanho_fold = len(X) // num_folds
 
     # Embaralha os índices das amostras
@@ -236,40 +96,31 @@ def cross_validation_estratificado(X, y, num_folds=10, random_state=None):
     np.random.shuffle(indices_embaralhados)
 
     # Inicializa a lista para armazenar as acurácias
-    acuracias = []
-
-    # Realiza o 10-fold cross-validation
+    taxaAcerto = []
     for i in range(num_folds):
-        # Calcula os índices dos dados do fold atual
         inicio_fold = i * tamanho_fold
         fim_fold = (i + 1) * tamanho_fold
         indices_teste = indices_embaralhados[inicio_fold:fim_fold]
 
-        # Garante que a quantidade de amostras no conjunto de teste seja exatamente tamanho_fold
+        # partições do mesmo tamanho
         if i == num_folds - 1:
             indices_teste = indices_embaralhados[inicio_fold:]
-
-        # Obtém os índices dos dados de treino
         indices_treino = list(set(indices_embaralhados) - set(indices_teste))
 
-        # Faz a divisão dos conjuntos de treino e teste
+        # divisão dos conjuntos de treino e teste
         X_treino = X[indices_treino]
         y_treino = y[indices_treino]
         X_teste = X[indices_teste]
         y_teste = y[indices_teste]
 
-        # Treina o modelo e avalia a acurácia
-        # (neste exemplo, considere que você tenha um modelo de classificação chamado "modelo")
-        modelo = KNeighborsClassifier(n_neighbors=1)
-        modelo.fit(X_treino, y_treino)
-        acuracia = modelo.score(X_teste, y_teste)
+        knn = KNeighborsClassifier(n_neighbors=1)
+        knn.fit(X_treino, y_treino)
+        acuracia = knn.score(X_teste, y_teste)
+        taxaAcerto.append(acuracia)
+    return taxaAcerto
 
-        # Armazena a acurácia na lista de resultados
-        acuracias.append(acuracia)
-    return acuracias
-holdoutE = holdout("estratificado")
-holdout = holdout("aleatorio")
-
+holdoutE = get_holdout("estratificado", X, y)
+holdout = get_holdout("aleatorio", X, y)
 
 print(f'Holdout aleatorio 90/10\nMedia: {mediaamostra(holdout)}\nTaxas de acerto\n'
       f'{holdout}\n')
@@ -281,4 +132,41 @@ print(f'10-fold cross validation estratificado\nMedia:{mediaamostra(tenCross)}'
       f'\nTaxas de acerto: {tenCross}\nTaxa de acerto somada: {somaFold(tenCross)}\n')
 
 leave_one = leave_one_out(X, y)
-print(f'Leave-one-out:\nAcerto:{mediaamostra(leave_one)}')
+print(f'Leave-one-out:\nAcerto:{mediaamostra(leave_one)}\n')
+
+####################################################################################################3
+
+print("SEM A ULTIMA COLUNA: ")
+holdoutColuna = get_holdout("estratificado", x_, y)
+holdoutColuna2 = get_holdout("aleatorio", x_, y)
+print(f'Holdout aleatorio 90/10 SEM COLUNA\nMedia: {mean(holdoutColuna)}\nTaxas de acerto\n'
+      f'{holdoutColuna}\n')
+print(f'Holdout estratificado 90/10 SEM COLUNA\nMedia: {mean(holdoutColuna2)}\nTaxas de acerto\n'
+      f'{holdoutColuna2}\n')
+
+tenCross2 = cross_validation_estratificado(x_, y, num_folds=10)
+print(f'10-fold cross validation estratificado SEM COLUNA\nMedia:{mean(tenCross)}'
+      f'\nTaxas de acerto: {tenCross}\nTaxa de acerto somada: {somaFold(tenCross)}\n')
+
+leave_one2 = leave_one_out(x_, y)
+print(f'Leave-one-out:SEM COLUNA\nAcerto:{mean(leave_one)}')
+
+#holdout aleatorio:
+intervaloHA = intervaloDeConfianca(aux.calcularDif(holdout, holdoutColuna2))
+#holdout estratificado:
+intervaloHE = intervaloDeConfianca(aux.calcularDif(holdoutE, holdoutColuna))
+#10-cross
+intervaloE = intervaloDeConfianca(aux.calcularDif(tenCross, tenCross2))
+#leave
+intervaloLeave = intervaloDeConfianca(aux.calcularDif(leave_one, leave_one2))
+
+print(f'HOLDOUTS ALEATORIOS: \nIntervalo de confiança: {intervaloHA}\nMedia com coluna: {mean(holdout)}\n'
+      f'Media sem coluna: {mean(holdoutColuna2)}\n')
+print(f'HOLDOUTS ESTRATIFICADO: \nIntervalo de confiança: {intervaloHE}\nMedia com coluna: {mean(holdoutE)}\n'
+      f'Media sem coluna: {mean(holdoutColuna)}\n')
+
+print(f'10-CROSS: \nIntervalo de confiança: {intervaloE}\nMedia com coluna: {mean(tenCross)}\n'
+      f'Media sem coluna: {mean(tenCross2)}\n')
+
+print(f'LEAVE ONE OUT: \nIntervalo de confiança: {intervaloLeave}\nMedia com coluna: {mean(leave_one)}\n'
+      f'Media sem coluna: {mean(leave_one2)}\n')

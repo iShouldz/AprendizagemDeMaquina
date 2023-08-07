@@ -8,7 +8,7 @@ data.columns = ["buying", "maint", "doors", "persons", "lug_boot", "safety", "Cl
 
 # Conversão de dados categoricos
 data = pd.get_dummies(data, columns=["buying", "maint", "doors", "persons", "lug_boot", "safety"], drop_first=True)
-
+print(data)
 X = data.drop("Classe", axis=1)
 y = data["Classe"]
 
@@ -31,7 +31,6 @@ def holdout100(n):
 ex1 = holdout100(1)
 ex2 = holdout100(5)
 ex3 = holdout100(10)
-
 
 print(f'Número minimo por folha: 1\n'
       f'Acerto para o conjunto de treino: {ex1[0][0]}\n'

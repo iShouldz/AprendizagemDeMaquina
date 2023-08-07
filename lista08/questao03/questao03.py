@@ -8,7 +8,6 @@ data.columns = ['Class', 'age', 'menopause', 'tumor-size', 'inv-nodes', 'node-ca
                 'breast-quad', 'irradiat']
 print(data)
 data = pd.get_dummies(data, columns=['age', 'menopause', 'tumor-size', 'inv-nodes', 'node-caps', 'deg-malig',
-
                                      'breast', 'breast-quad', 'irradiat'], drop_first=True)
 print(data)
 

@@ -1,6 +1,6 @@
 ![readme](etiqueta.png)
 
-<h1>Repositorio referente as listas de exercicio da disciplina de **aprendizagem de máquina** </h1>
+<h1>Repositorio referente as listas de exercicio da disciplina de aprendizagem de máquina </h1>
 
 ### Atualizações do repositorio
 - [x] Lista 01_AM

@@ -1,6 +1,6 @@
 ![readme](etiqueta.png)
 
-<h1>Repositorio referente as listas de exercicio da disciplina de aprendizagem de máquina </h1>
+<h2>Repositorio referente as listas de exercicio da disciplina de aprendizagem de máquina </h2>
 
 ### Atualizações do repositorio
 - [x] Lista 01_AM
@@ -15,4 +15,4 @@
 1. Python
 2. PyCharm Profissional 2022.3.3
 
-[Resolução das listas](https://drive.google.com/drive/folders/1exszd8b56_D1dJc1LhvrFNNzTbpOOIjz?usp=sharing)
+👉 [Resolução das listas](https://drive.google.com/drive/folders/1exszd8b56_D1dJc1LhvrFNNzTbpOOIjz?usp=sharing)

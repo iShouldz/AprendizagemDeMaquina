@@ -1,9 +1,9 @@
 """
 Realize um Holdout com 1-NN (distância Euclidiana), utilizando 70% dos dados
-para treinamento e o restante (30%) para teste na base de dados Wine archive.ics.uci.
+para treinamento e o restante (30%) para x_teste na base de dados Wine archive.ics.uci.
 edu/ml/datasets/Wine. Você precisa mostrar como calculou cada métrica, não pode utilizar
 biblioteca que já calcula a métrica diretamente, mas pode utilizar biblioteca para o 1-NN e para
-dividir os dados entre treino e teste.
+dividir os dados entre x_treino e x_teste.
 """
 
 import lista04auxiliar

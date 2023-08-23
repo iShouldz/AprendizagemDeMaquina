@@ -1,14 +1,18 @@
 import pandas as pd
 from sklearn.tree import DecisionTreeClassifier
-from sklearn.model_selection import train_test_split
 
-# Carregar a base de dados Balance Scale
-data = pd.read_csv("balance_scale.csv")
+data = pd.read_csv("balance-scale.txt")
+data.columns = ['classe', 'Left-Weight', 'Left-Distance', 'Right-Weight', 'Right-Distance']
 
-# Separar os atributos e os rótulos
-X = data.drop("Class", axis=1)
-y = data["Class"]
+X = data.drop("classe", axis=1)
+y = data["classe"]
 
-# Treinar a árvore de decisão
 dt_model = DecisionTreeClassifier(random_state=42)
 dt_model.fit(X, y)
+
+exemplo1 = [[1, 1, 1, 4], [1, 1, 1, 2]]
+resultado = dt_model.predict(exemplo1)
+print(resultado)
+
+##############################################################################################
+

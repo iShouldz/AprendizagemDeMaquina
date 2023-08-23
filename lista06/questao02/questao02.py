@@ -23,7 +23,7 @@ def holdout100(dadosLimpos):
 
         #Estrategia de correção: uso da media
         imputer = SimpleImputer(strategy='mean')
-        # Preenchendo os valores omissos no conjunto de teste usando os valores definidos no treino
+        # Preenchendo os valores omissos no conjunto de x_teste usando os valores definidos no x_treino
         treino_imputed = pd.DataFrame(imputer.fit_transform(treino_classe),
                                       columns=treino_classe.columns)
         teste_classe = teste.drop(13, axis=1)
@@ -41,7 +41,7 @@ def holdout100(dadosLimpos):
 data = data.replace('?', np.nan)
 data = data.dropna(axis=1)
 
-# Separando conjuntos de treino e teste
+# Separando conjuntos de x_treino e x_teste
 x = data.iloc[:, :-1]
 y = data.iloc[:, -1]
 

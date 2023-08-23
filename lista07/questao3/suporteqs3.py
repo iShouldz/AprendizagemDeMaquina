@@ -171,5 +171,5 @@ def florestTreinoTesteSemTransformarBiblioteca():
         y_teste[i] = int(math.log(y_teste[i] + 1, 10))
         y_treino[i] = int(math.log(y_treino[i] + 1, 10))
    # print(y_teste)'''
-    #print(f"treino: {y_treino}")
+    #print(f"x_treino: {y_treino}")
     return x_treino, x_teste, y_treino, y_teste

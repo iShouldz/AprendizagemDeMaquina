@@ -1,7 +1,7 @@
 '''Construa sua própria implementação do classicador pelo vizinho mais próximo
 (1 − NN) utilizando distância euclidiana. Avalie este classicador utilizando metade dos exem-
 plos de cada classe da base Iris (archive.ics.uci.edu/ml/datasets/iris) como conjunto de
-teste e o restante como conjunto de treinamento. Atenção: construa também a implementação
+x_teste e o restante como conjunto de treinamento. Atenção: construa também a implementação
 da distância euclidiana.
 '''
 

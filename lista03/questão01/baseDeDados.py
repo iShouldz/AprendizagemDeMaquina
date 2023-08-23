@@ -36,20 +36,20 @@ matriz2 = np.split(array, 2)
 array = np.array(vetorVirginica)
 matriz3 = np.split(array, 2)
 
-#Separando conjunto de treino e teste de cada classe
+#Separando conjunto de x_treino e x_teste de cada classe
 arrayTreinamentoSetosa = matriz[0]
 arrayTestesSetosa = matriz[1]
 arrayTreinamentoVersicolor = matriz2[0]
 arrayTestesVersicolor = matriz2[1]
 arrayTreinamentoVirginica = matriz3[0]
 arrayTestesVirginica = matriz3[1]
-#Concatenando os conjuntos de treino e teste
+#Concatenando os conjuntos de x_treino e x_teste
 arrayTreinamento = np.concatenate((arrayTreinamentoSetosa, arrayTreinamentoVersicolor))
 arrayTreinamento = np.concatenate((arrayTreinamento, arrayTreinamentoVirginica))
 arrayTeste = np.concatenate((arrayTestesVirginica, arrayTestesSetosa))
 arrayTeste = np.concatenate((arrayTeste, arrayTestesVersicolor))
 
-#Convertendo os dados para float e obtendo o conjunto de classificadores para teste
+#Convertendo os dados para float e obtendo o conjunto de classificadores para x_teste
 copiaClasTeste = arrayTeste
 arrayTeste = np.delete(arrayTeste, [4], 1)
 arrayTeste = arrayTeste.astype('float64')

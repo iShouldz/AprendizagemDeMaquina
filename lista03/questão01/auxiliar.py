@@ -18,8 +18,8 @@ def distanciaMinkowski(xi, xj, p):
 
 
 '''
-    xi, yi => treino
-    xt, yt => teste
+    xi, yi => x_treino
+    xt, yt => x_teste
 '''
 def vizinhoMaisProximo(x_treino, y_treino, x_teste):
     dmin = 99999999999

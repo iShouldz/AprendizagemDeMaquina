@@ -57,13 +57,13 @@ arrayTeste = np.concatenate((arrayTeste, matrizIT[1]))
 arrayTeste = np.concatenate((arrayTeste, matrizUK[1]))
 arrayTeste = np.concatenate((arrayTeste, matrizUS[1]))
 
-#Conjunto de treino
+#Conjunto de x_treino
 copiaTreinamento = arrayTreinamento
 classificadores = np.delete(copiaTreinamento, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], 1)
 arrayTreinamento = np.delete(arrayTreinamento, [0], 1)
 arrayTreinamento = arrayTreinamento.astype('float64')
 
-#Conjunto de teste
+#Conjunto de x_teste
 copiaTeste = arrayTeste
 acertoClassificadores = np.delete(copiaTeste, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], 1)
 arrayTeste = np.delete(arrayTeste, [0], 1)

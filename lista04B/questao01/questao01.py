@@ -39,7 +39,7 @@ def holdout_estratificado(X, y, tamanho_teste=0.2):
         indices_teste.extend(indices_classe_teste)
     indices_teste_extra = indices_embaralhados[:num_teste - len(indices_teste)]
     indices_teste.extend(indices_teste_extra)
-    # índices das amostras de treino
+    # índices das amostras de x_treino
     indices_treino = list(set(indices_embaralhados) - set(indices_teste))
 
     X_treino = X[indices_treino]
@@ -71,11 +71,11 @@ def somaFold(lista):
 def leave_one_out(X, y):
     taxaAcerto = []
     for i in range(len(X)):
-        # Conjunto de teste por partição
+        # Conjunto de x_teste por partição
         X_teste = X[i:i+1]
         y_teste = y[i:i+1]
 
-        # Conjunto de treino, as demais partições
+        # Conjunto de x_treino, as demais partições
         X_treino = np.delete(X, i, axis=0)
         y_treino = np.delete(y, i)
 
@@ -107,7 +107,7 @@ def cross_validation_estratificado(X, y, num_folds=10, random_state=None):
             indices_teste = indices_embaralhados[inicio_fold:]
         indices_treino = list(set(indices_embaralhados) - set(indices_teste))
 
-        # divisão dos conjuntos de treino e teste
+        # divisão dos conjuntos de x_treino e x_teste
         X_treino = X[indices_treino]
         y_treino = y[indices_treino]
         X_teste = X[indices_teste]

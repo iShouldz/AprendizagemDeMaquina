@@ -26,7 +26,7 @@ rmse_list = []
 
 # Repetir o holdout e calcular o RMSE
 for i in range(n_repeticoes):
-    # Dividir os dados em treinamento e teste
+    # Dividir os dados em treinamento e x_teste
     X_train, X_test, y_train_transformed, y_test_transformed = train_test_split(X, y_transformed,
                                                                                 test_size=holdout_size, random_state=i)
 

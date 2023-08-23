@@ -1,6 +1,7 @@
 ![readme](etiqueta.png)
 
 <h2>Repositorio referente as listas de exercicio da disciplina de aprendizagem de máquina </h2>
+<h3>Repositorio finalizado. Se for util, deixe uma star⭐ no repositorio.</h3>
 
 ### Atualizações do repositorio
 - [x] Lista 01_AM

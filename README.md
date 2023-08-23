@@ -9,7 +9,12 @@
 - [x] Lista 04_AM
 - [x] Lista 04b_AM
 - [x] Lista 05_AM
+- [x] Lista 06_AM
 - [x] Lista 07_AM
+- [x] Lista 08_AM
+- [x] Lista 09_AM
+- [x] Lista 10_AM
+- [x] Lista 11_AM
 
 ### Tecnologias utilizadas para implementação 
 1. Python
